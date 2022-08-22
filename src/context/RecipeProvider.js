@@ -8,28 +8,38 @@ function RecipeProvider({ children }) {
   const [category, setCategory] = useState([]);
   const [statusSearchBar, setStatusSearchBar] = useState(false);
 
-  const handleCategoryFood = async () => {
-    const response = await getMealApi('category');
+  const getFoodApi = async (radio, search) => {
+    const response = await getMealApi(radio, search);
     setCategory(response);
   };
 
-  const handleCategoryDrink = async () => {
-    const response = await getCockTailApi('category');
+  const getDrinkApi = async (radio, search) => {
+    const response = await getCockTailApi(radio, search);
     setCategory(response);
+  };
+
+  const handleFoodsAndDriks = (page, radio, search) => {
+    if (page === 'foods') {
+      getFoodApi(radio, search);
+    }
+    if (page === 'drinks') {
+      getDrinkApi(radio, search);
+    }
   };
 
   useEffect(() => {
-    handleCategoryFood();
+    getFoodApi('', 'category');
   }, []);
 
   return (
     <RecipeContext.Provider
       value={ {
         category,
-        handleCategoryFood,
-        handleCategoryDrink,
+        getFoodApi,
+        getDrinkApi,
         statusSearchBar,
         setStatusSearchBar,
+        handleFoodsAndDriks,
       } }
     >
       {children}

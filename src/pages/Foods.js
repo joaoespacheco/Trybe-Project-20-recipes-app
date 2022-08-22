@@ -8,7 +8,7 @@ export default function Foods() {
   return (
     <>
       <Header statusButton pageTitle="Foods" />
-      { statusSearchBar && <SearchBar />}
+      { statusSearchBar && <SearchBar page="foods" />}
       <section>
         <p>Oi, eu sou o Foods</p>
       </section>
