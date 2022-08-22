@@ -6,7 +6,7 @@ import getCockTailApi from '../services/CockTailApi';
 
 function RecipeProvider({ children }) {
   const [category, setCategory] = useState([]);
-  // const [] = useState();
+  const [statusSearchBar, setStatusSearchBar] = useState(false);
 
   const handleCategoryFood = async () => {
     const response = await getMealApi('category');
@@ -25,7 +25,11 @@ function RecipeProvider({ children }) {
   return (
     <RecipeContext.Provider
       value={ {
-        category, handleCategoryFood, handleCategoryDrink,
+        category,
+        handleCategoryFood,
+        handleCategoryDrink,
+        statusSearchBar,
+        setStatusSearchBar,
       } }
     >
       {children}

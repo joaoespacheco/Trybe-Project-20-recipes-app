@@ -31,7 +31,14 @@ describe('Verificando o componente Header', () => {
     expect(history.location.pathname).toBe('/profile');
 
   });
-  // it('', () => {
+  it('Verificando a funcionabilidade do icon search', () => {
+    const { history } = renderWithRouter(<App />);
 
-  // });
+    history.push('/foods');
+
+    const iconSearch = screen.getByTestId('search-top-btn');
+    userEvent.click(iconSearch);
+
+    expect(screen.getByTestId('search-input')).toBeInTheDocument();
+  });
 });
