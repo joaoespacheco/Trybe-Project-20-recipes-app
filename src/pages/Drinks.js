@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import CardDrink from '../components/CardDrink';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import RecipeContext from '../context/RecipeContext';
@@ -17,6 +18,7 @@ export default function Drinks() {
       { recipesList.length === 1 && (
         <Redirect to={ `/drinks/${recipesList[0].idDrink}` } />
       )}
+      <Footer />
     </>
   );
 }
