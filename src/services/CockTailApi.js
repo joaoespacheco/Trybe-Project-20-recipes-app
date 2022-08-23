@@ -2,27 +2,34 @@ const FIRST_LETTER_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/searc
 const CATEGORY_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 const NAME_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const INGREDIENT_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
+const FILTER_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
 
-const filterEndpoint = (type, enpoint) => {
+const filterEndpoint = (type, endpoint) => {
   switch (type) {
   case 'firstLetter':
-    return (FIRST_LETTER_ENDPOINT + enpoint);
+    return (FIRST_LETTER_ENDPOINT + endpoint);
   case 'name':
-    return (NAME_ENDPOINT + enpoint);
-  case 'category':
-    return (CATEGORY_ENDPOINT);
+    return (NAME_ENDPOINT + endpoint);
+  case 'filter':
+    return (FILTER_ENDPOINT + endpoint);
   case 'ingredient':
-    return (INGREDIENT_ENDPOINT + enpoint);
+    return (INGREDIENT_ENDPOINT + endpoint);
   default:
     return ('');
   }
 };
-const getCockTailApi = async (type, enpoint) => {
-  const URL = filterEndpoint(type, enpoint);
+const getCockTailApi = async (type, endpoint) => {
+  const URL = filterEndpoint(type, endpoint);
   try {
-    const response = await fetch(URL);
-    const json = await response.json();
-    return json;
+    const recipeResponse = await fetch(URL);
+    const recipeJson = await recipeResponse.json();
+    const categoryResponse = await fetch(CATEGORY_ENDPOINT);
+    const categoryJson = await categoryResponse.json();
+    const apiResponse = {
+      drinks: recipeJson.drinks,
+      categoryDrinks: categoryJson.drinks,
+    };
+    return apiResponse;
   } catch (error) {
     return error;
   }
