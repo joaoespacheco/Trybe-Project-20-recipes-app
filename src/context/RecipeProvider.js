@@ -1,21 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { node } from 'prop-types';
 import RecipeContext from './RecipeContext';
 import getMealApi from '../services/MealApi';
 import getCockTailApi from '../services/CockTailApi';
 
 function RecipeProvider({ children }) {
-  const [category, setCategory] = useState([]);
+  const [recipesList, setRecipesList] = useState([]);
   const [statusSearchBar, setStatusSearchBar] = useState(false);
 
   const getFoodApi = async (radio, search) => {
-    const response = await getMealApi(radio, search);
-    setCategory(response);
+    const { meals } = await getMealApi(radio, search);
+    if (!meals) {
+      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+    setRecipesList(meals);
   };
 
   const getDrinkApi = async (radio, search) => {
-    const response = await getCockTailApi(radio, search);
-    setCategory(response);
+    const { drinks } = await getCockTailApi(radio, search);
+    if (!drinks) {
+      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+    setRecipesList(drinks);
   };
 
   const handleFoodsAndDriks = (page, radio, search) => {
@@ -27,14 +33,10 @@ function RecipeProvider({ children }) {
     }
   };
 
-  useEffect(() => {
-    getFoodApi('', 'category');
-  }, []);
-
   return (
     <RecipeContext.Provider
       value={ {
-        category,
+        recipesList,
         getFoodApi,
         getDrinkApi,
         statusSearchBar,

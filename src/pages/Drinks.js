@@ -1,17 +1,22 @@
 import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
+import CardDrink from '../components/CardDrink';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import RecipeContext from '../context/RecipeContext';
 
 export default function Drinks() {
-  const { statusSearchBar } = useContext(RecipeContext);
+  const { statusSearchBar, recipesList } = useContext(RecipeContext);
   return (
     <>
       <Header statusButton pageTitle="Drinks" />
       { statusSearchBar && <SearchBar page="drinks" />}
       <section>
-        <p>Oi, eu sou o Drinks</p>
+        { recipesList.length > 1 && <CardDrink />}
       </section>
+      { recipesList.length === 1 && (
+        <Redirect to={ `/drinks/${recipesList[0].idDrink}` } />
+      )}
     </>
   );
 }

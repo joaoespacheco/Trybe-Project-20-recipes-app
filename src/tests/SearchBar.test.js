@@ -79,7 +79,7 @@ describe('Verificando as funcionabilidades do componente SearchBar', () => {
     userEvent.click(button);
 
     await waitFor (() => {
-      expect(fetch).not.toHaveBeenCalledTimes(2);
+      expect(fetch).not.toHaveBeenCalledTimes(1);
     });
   });
   it('Verificando se o fetch é chamado na página de Drinks', async () => {
@@ -105,7 +105,7 @@ describe('Verificando as funcionabilidades do componente SearchBar', () => {
     userEvent.click(button);
  
     await waitFor (() => {
-      expect(fetch).toHaveBeenCalledTimes(2);
+      expect(fetch).toHaveBeenCalledTimes(1);
     });
   });
   //
@@ -132,7 +132,7 @@ describe('Verificando as funcionabilidades do componente SearchBar', () => {
     userEvent.click(button);
  
     await waitFor (() => {
-      expect(fetch).toHaveBeenCalledTimes(2);
+      expect(fetch).toHaveBeenCalledTimes(1);
     });
   });
 })
