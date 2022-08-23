@@ -10,18 +10,18 @@ export default function CardFood() {
     <div>
       {recipes.map(({ strMealThumb, strMeal, idMeal }, index) => (
         <Link
-          to={ `/foods/${idMeal}}` }
-          data-testid={ `${index}-recipe-card` }
+          to={ `/foods/${idMeal}` }
           key={ idMeal }
         >
-          <img
-            src={ strMealThumb }
-            alt={ strMeal }
-            data-testid={ `${index}-card-img` }
-          />
-          <h3 data-testid={ `${index}-card-name` }>{ strMeal }</h3>
+          <div data-testid={ `${index}-recipe-card` }>
+            <img
+              src={ strMealThumb }
+              alt={ strMeal }
+              data-testid={ `${index}-card-img` }
+            />
+            <h3 data-testid={ `${index}-card-name` }>{ strMeal }</h3>
+          </div>
         </Link>
-
       ))}
     </div>
   );
