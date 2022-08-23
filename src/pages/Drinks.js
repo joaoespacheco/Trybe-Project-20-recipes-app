@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import Recipes from '../components/Recipes';
+import CardDrink from '../components/CardDrink';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import RecipeContext from '../context/RecipeContext';
@@ -26,6 +26,7 @@ export default function Drinks() {
       { recipesList.length === 1 && (
         <Redirect to={ `/drinks/${recipesList[0].idDrink}` } />
       )}
+      <Footer />
     </>
   );
 }
