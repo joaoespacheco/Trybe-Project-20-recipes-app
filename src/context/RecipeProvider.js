@@ -7,21 +7,24 @@ import getCockTailApi from '../services/CockTailApi';
 function RecipeProvider({ children }) {
   const [recipesList, setRecipesList] = useState([]);
   const [statusSearchBar, setStatusSearchBar] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   const getFoodApi = async (radio, search) => {
-    const { meals } = await getMealApi(radio, search);
+    const { meals, categoryMeals } = await getMealApi(radio, search);
     if (!meals) {
       return global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
     setRecipesList(meals);
+    setCategories(categoryMeals);
   };
 
   const getDrinkApi = async (radio, search) => {
-    const { drinks } = await getCockTailApi(radio, search);
+    const { drinks, categoryDrinks } = await getCockTailApi(radio, search);
     if (!drinks) {
       return global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
     setRecipesList(drinks);
+    setCategories(categoryDrinks);
   };
 
   const handleFoodsAndDriks = (page, radio, search) => {
@@ -37,6 +40,7 @@ function RecipeProvider({ children }) {
     <RecipeContext.Provider
       value={ {
         recipesList,
+        categories,
         getFoodApi,
         getDrinkApi,
         statusSearchBar,

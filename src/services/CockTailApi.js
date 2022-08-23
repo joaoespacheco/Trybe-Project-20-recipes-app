@@ -20,9 +20,15 @@ const filterEndpoint = (type, enpoint) => {
 const getCockTailApi = async (type, enpoint) => {
   const URL = filterEndpoint(type, enpoint);
   try {
-    const response = await fetch(URL);
-    const json = await response.json();
-    return json;
+    const recipeResponse = await fetch(URL);
+    const recipeJson = await recipeResponse.json();
+    const categoryResponse = await fetch(CATEGORY_ENDPOINT);
+    const categoryJson = await categoryResponse.json();
+    const apiResponse = {
+      drinks: recipeJson.drinks,
+      categoryDrinks: categoryJson.drinks,
+    };
+    return apiResponse;
   } catch (error) {
     return error;
   }

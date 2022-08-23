@@ -4,6 +4,7 @@ import Recipes from '../components/Recipes';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import RecipeContext from '../context/RecipeContext';
+import CategoriesButtons from '../components/Categories';
 
 export default function Drinks() {
   const {
@@ -14,12 +15,13 @@ export default function Drinks() {
 
   useEffect(() => {
     handleFoodsAndDriks('drinks', 'name', '');
-  }, [handleFoodsAndDriks]);
+  }, []);
 
   return (
     <>
       <Header statusButton pageTitle="Drinks" />
       { statusSearchBar && <SearchBar page="drinks" />}
+      <CategoriesButtons />
       <section>
         { recipesList.length > 1 && <Recipes page="drinks" />}
       </section>

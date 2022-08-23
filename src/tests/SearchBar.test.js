@@ -105,7 +105,7 @@ describe('Verificando as funcionabilidades do componente SearchBar', () => {
     userEvent.click(button);
  
     await waitFor (() => {
-      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(fetch).toHaveBeenCalledTimes(5);
     });
   });
   //
@@ -129,10 +129,11 @@ describe('Verificando as funcionabilidades do componente SearchBar', () => {
     userEvent.type(searchInput, "Piri");
 
     const button = screen.getByTestId('exec-search-btn');
+    expect(button).toBeInTheDocument();
     userEvent.click(button);
  
     await waitFor (() => {
-      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(fetch).toHaveBeenCalledTimes(4);
     });
   });
 })
