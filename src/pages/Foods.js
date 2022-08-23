@@ -12,21 +12,24 @@ export default function Foods() {
     statusSearchBar,
     recipesList,
     handleFoodsAndDriks,
+    statusFilter,
+    setStatusFilter,
   } = useContext(RecipeContext);
 
   useEffect(() => {
     handleFoodsAndDriks('foods', 'name', '');
+    setStatusFilter(true);
   }, []);
 
   return (
     <>
       <Header statusButton pageTitle="Foods" />
       { statusSearchBar && <SearchBar page="foods" />}
-      <CategoriesButtons />
+      <CategoriesButtons page="foods" />
       <section>
-        { recipesList.length > 1 && <Recipes page="foods" />}
+        { recipesList.length > 0 && <Recipes page="foods" />}
       </section>
-      { recipesList.length === 1 && (
+      { statusFilter && recipesList.length === 1 && (
         <Redirect to={ `/foods/${recipesList[0].idMeal}` } />
       )}
       <Footer />

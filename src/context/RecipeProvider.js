@@ -8,6 +8,7 @@ function RecipeProvider({ children }) {
   const [recipesList, setRecipesList] = useState([]);
   const [statusSearchBar, setStatusSearchBar] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [statusFilter, setStatusFilter] = useState(true);
 
   const getFoodApi = async (radio, search) => {
     const { meals, categoryMeals } = await getMealApi(radio, search);
@@ -41,11 +42,13 @@ function RecipeProvider({ children }) {
       value={ {
         recipesList,
         categories,
+        statusFilter,
         getFoodApi,
         getDrinkApi,
         statusSearchBar,
         setStatusSearchBar,
         handleFoodsAndDriks,
+        setStatusFilter,
       } }
     >
       {children}
