@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import CardDrink from '../components/CardDrink';
+import Recipes from '../components/Recipes';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import RecipeContext from '../context/RecipeContext';
