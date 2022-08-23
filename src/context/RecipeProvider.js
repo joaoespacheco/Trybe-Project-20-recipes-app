@@ -1,31 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { node } from 'prop-types';
 import RecipeContext from './RecipeContext';
 import getMealApi from '../services/MealApi';
 import getCockTailApi from '../services/CockTailApi';
 
 function RecipeProvider({ children }) {
-  const [category, setCategory] = useState([]);
-  // const [] = useState();
+  const [recipesList, setRecipesList] = useState([]);
+  const [statusSearchBar, setStatusSearchBar] = useState(false);
 
-  const handleCategoryFood = async () => {
-    const response = await getMealApi('category');
-    setCategory(response);
+  const getFoodApi = async (radio, search) => {
+    const { meals } = await getMealApi(radio, search);
+    if (!meals) {
+      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+    setRecipesList(meals);
   };
 
-  const handleCategoryDrink = async () => {
-    const response = await getCockTailApi('category');
-    setCategory(response);
+  const getDrinkApi = async (radio, search) => {
+    const { drinks } = await getCockTailApi(radio, search);
+    if (!drinks) {
+      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+    setRecipesList(drinks);
   };
 
-  useEffect(() => {
-    handleCategoryFood();
-  }, []);
+  const handleFoodsAndDriks = (page, radio, search) => {
+    if (page === 'foods') {
+      getFoodApi(radio, search);
+    }
+    if (page === 'drinks') {
+      getDrinkApi(radio, search);
+    }
+  };
 
   return (
     <RecipeContext.Provider
       value={ {
-        category, handleCategoryFood, handleCategoryDrink,
+        recipesList,
+        getFoodApi,
+        getDrinkApi,
+        statusSearchBar,
+        setStatusSearchBar,
+        handleFoodsAndDriks,
       } }
     >
       {children}
