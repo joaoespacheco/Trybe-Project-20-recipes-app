@@ -50,7 +50,7 @@ export default function MealRecipe({ recipe }) {
           </>
         )
       }
-      <RecomendationCards />
+      <RecomendationCards page="foods" />
     </section>
   );
 }

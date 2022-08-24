@@ -36,7 +36,7 @@ export default function DrinkRecipe({ recipe }) {
           </>
         )
       }
-      <RecomendationCards />
+      <RecomendationCards page="drinks" />
     </section>
   );
 }
