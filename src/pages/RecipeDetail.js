@@ -7,6 +7,7 @@ import getCockTailApi from '../services/CockTailApi';
 
 export default function RecipeDetail() {
   const [recipe, setRecipe] = useState([]);
+  const [statusButton, setStatusButton] = useState(true);
   const { location: { pathname } } = useHistory();
   const path = pathname.split('/');
 
@@ -54,17 +55,35 @@ export default function RecipeDetail() {
     getApiRecipe();
   }, []);
 
+  useEffect(() => {
+    const recipesDone = localStorage.getItem('doneRecipes');
+    console.log(recipesDone);
+    if (recipesDone) {
+      const statusRecipe = JSON.parse(recipesDone).some(({ idMeal, idDrink }) => (
+        idMeal === recipe.idMeal || idDrink === recipe.idDrink
+      ));
+      setStatusButton(!statusRecipe);
+    } else {
+      setStatusButton(true);
+    }
+  }, []);
+
   return (
     <section>
       { recipe.idMeal && <MealRecipe recipe={ recipe } /> }
       { recipe.idDrink && <DrinkRecipe recipe={ recipe } /> }
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        style={ { position: 'fixed', bottom: '0' } }
-      >
-        Start Recipe
-      </button>
+      {
+        statusButton
+        && (
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            style={ { position: 'fixed', bottom: '0' } }
+          >
+            Start Recipe
+          </button>
+        )
+      }
     </section>
   );
 }

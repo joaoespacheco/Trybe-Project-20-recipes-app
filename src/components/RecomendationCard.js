@@ -33,11 +33,11 @@ export default function RecomendationCards({ page }) {
           >
             <img
               src={ strDrinkThumb }
-              style={ { width: '180px', padding: '0 1px' } }
+              style={ { width: '180px', padding: '0 10px' } }
               alt={ strDrink }
             />
             <h3>{ strAlcoholic }</h3>
-            <h3 data-testId={ `${index}-recomendation-title` }>{ strDrink }</h3>
+            <h3 data-testid={ `${index}-recomendation-title` }>{ strDrink }</h3>
           </div>
         ))
       ) : (
@@ -45,11 +45,11 @@ export default function RecomendationCards({ page }) {
           <div data-testid={ `${index}-recomendation-card` } key={ idMeal }>
             <img
               src={ strMealThumb }
-              style={ { width: '150px', padding: '0 10px' } }
+              style={ { width: '175px', padding: '0 10px' } }
               alt={ strMeal }
             />
             <h3>{ strCategory }</h3>
-            <h3 data-testId={ `${index}-recomendation-title` }>{ strMeal }</h3>
+            <h3 data-testid={ `${index}-recomendation-title` }>{ strMeal }</h3>
           </div>
         ))
       )}
