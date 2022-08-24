@@ -58,6 +58,13 @@ export default function RecipeDetail() {
     <section>
       { recipe.idMeal && <MealRecipe recipe={ recipe } /> }
       { recipe.idDrink && <DrinkRecipe recipe={ recipe } /> }
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        style={ { position: 'fixed', bottom: '0' } }
+      >
+        Start Recipe
+      </button>
     </section>
   );
 }
