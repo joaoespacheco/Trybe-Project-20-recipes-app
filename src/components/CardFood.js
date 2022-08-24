@@ -7,7 +7,7 @@ export default function CardFood() {
   const maxCardNumbers = 12;
   const recipes = recipesList.filter((_recipe, index) => index < maxCardNumbers);
   return (
-    <div>
+    <div style={ { display: 'flex', flexDirection: 'row', flexWrap: 'wrap' } }>
       {recipes.map(({ strMealThumb, strMeal, idMeal }, index) => (
         <Link
           to={ `/foods/${idMeal}` }
@@ -16,6 +16,7 @@ export default function CardFood() {
           <div data-testid={ `${index}-recipe-card` }>
             <img
               src={ strMealThumb }
+              style={ { width: '150px', padding: '0 10px' } }
               alt={ strMeal }
               data-testid={ `${index}-card-img` }
             />
