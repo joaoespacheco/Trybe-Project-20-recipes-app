@@ -16,7 +16,7 @@ describe('Testando a página Profile', () => {
     getUser = undefined;
   })
 
-  it('1. Verifica se o componente acessa a localStorage para recuperar o e-mail da pessoa usuária', () => {
+  it('Verifica se o componente acessa a localStorage para recuperar o e-mail da pessoa usuária', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/profile');
 
