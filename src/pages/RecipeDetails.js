@@ -5,7 +5,6 @@ import MealRecipe from '../components/MealRecipe';
 import DrinkRecipe from '../components/DrinkRecipe';
 import getMealApi from '../services/MealApi';
 import getCockTailApi from '../services/CockTailApi';
-import shareIcon from '../images/shareIcon.svg';
 
 export default function RecipeDetails() {
   const [recipe, setRecipe] = useState([]);
@@ -100,16 +99,24 @@ export default function RecipeDetails() {
   };
 
   const handleClickShare = () => {
-    const FIVE_SECONDS = 5000;
     setStatusMessage(true);
     copy(`http://localhost:3000${pathname}`);
-    setInterval(() => setStatusMessage(false), FIVE_SECONDS);
   };
 
   return (
     <section>
-      { recipe.idMeal && <MealRecipe recipe={ recipe } /> }
-      { recipe.idDrink && <DrinkRecipe recipe={ recipe } /> }
+      { recipe.idMeal
+      && <MealRecipe
+        recipe={ recipe }
+        handleClickShare={ handleClickShare }
+        statusMessage={ statusMessage }
+      /> }
+      { recipe.idDrink
+      && <DrinkRecipe
+        recipe={ recipe }
+        handleClickShare={ handleClickShare }
+        statusMessage={ statusMessage }
+      /> }
       {
         statusDone
         && (
@@ -123,30 +130,6 @@ export default function RecipeDetails() {
           </button>
         )
       }
-      <button
-        type="button"
-        onClick={ handleClickShare }
-        style={ { background: 'none', border: 'none', cursor: 'pointer' } }
-      >
-        <img
-          src={ shareIcon }
-          alt="Ícone de compartilhamento"
-          data-testid="share-btn"
-        />
-      </button>
-      {statusMessage
-      && (
-        <span>
-          Link copied!
-        </span>
-      )}
-      <button
-        type="button"
-        data-testid="favorite-btn"
-      >
-        Favoritar
-      </button>
-
     </section>
   );
 }

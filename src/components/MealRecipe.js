@@ -1,8 +1,9 @@
 import React from 'react';
-import { objectOf, string } from 'prop-types';
+import { objectOf, string, func, bool } from 'prop-types';
 import RecomendationCards from './RecomendationCard';
+import shareIcon from '../images/shareIcon.svg';
 
-export default function MealRecipe({ recipe }) {
+export default function MealRecipe({ recipe, handleClickShare, statusMessage }) {
   const { ingredients, mensures } = recipe;
   const idVideo = recipe.strYoutube.split('=')[1];
 
@@ -19,6 +20,30 @@ export default function MealRecipe({ recipe }) {
               alt={ recipe.strMeal }
               style={ { width: '150px', padding: '0 10px' } }
             />
+
+            <button
+              type="button"
+              onClick={ handleClickShare }
+              style={ { background: 'none', border: 'none', cursor: 'pointer' } }
+              data-testid="share-btn"
+            >
+              <img
+                src={ shareIcon }
+                alt="Ícone de compartilhamento"
+              />
+            </button>
+            {statusMessage
+      && (
+        <span>
+          Link copied!
+        </span>
+      )}
+            <button
+              type="button"
+              data-testid="favorite-btn"
+            >
+              Favoritar
+            </button>
 
             <p data-testid="recipe-category">{ recipe.strCategory }</p>
 
@@ -57,4 +82,6 @@ export default function MealRecipe({ recipe }) {
 
 MealRecipe.propTypes = {
   recipe: objectOf(string),
+  handleClickShare: func,
+  statusMessage: bool,
 }.isRequired;
