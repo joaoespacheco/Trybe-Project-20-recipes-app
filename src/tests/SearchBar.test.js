@@ -61,9 +61,12 @@ describe('Verificando as funcionabilidades do componente SearchBar', () => {
       ok: true,
       json: jest.fn(() => mockDrinkFirstLetter),
     }));
+    jest.spyOn(global, 'alert')
+    global.alert = jest.fn();
 
     const { history } = renderWithRouter(<App />);
     history.push('/drinks');
+    
 
     const iconSearch = screen.getByTestId('search-top-btn');
 

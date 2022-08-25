@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import RecipeContext from '../context/RecipeContext';
-import CategoriesButtons from '../components/Categories';
+import Categories from '../components/Categories';
 
 export default function Drinks() {
   const {
@@ -25,7 +25,7 @@ export default function Drinks() {
     <>
       <Header statusButton pageTitle="Drinks" />
       { statusSearchBar && <SearchBar page="drinks" />}
-      <CategoriesButtons page="drinks" />
+      <Categories page="drinks" />
       <section>
         { recipesList.length > 1 && <Recipes page="drinks" />}
       </section>

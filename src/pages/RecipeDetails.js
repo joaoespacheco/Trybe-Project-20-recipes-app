@@ -5,7 +5,7 @@ import DrinkRecipe from '../components/DrinkRecipe';
 import getMealApi from '../services/MealApi';
 import getCockTailApi from '../services/CockTailApi';
 
-export default function RecipeDetail() {
+export default function RecipeDetails() {
   const [recipe, setRecipe] = useState([]);
   const [statusButton, setStatusButton] = useState(true);
   const { location: { pathname } } = useHistory();
@@ -57,7 +57,6 @@ export default function RecipeDetail() {
 
   useEffect(() => {
     const recipesDone = localStorage.getItem('doneRecipes');
-    console.log(recipesDone);
     if (recipesDone) {
       const statusRecipe = JSON.parse(recipesDone).some(({ idMeal, idDrink }) => (
         idMeal === recipe.idMeal || idDrink === recipe.idDrink
@@ -66,7 +65,7 @@ export default function RecipeDetail() {
     } else {
       setStatusButton(true);
     }
-  }, []);
+  }, [recipe]);
 
   return (
     <section>

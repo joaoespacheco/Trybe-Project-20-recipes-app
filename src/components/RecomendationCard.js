@@ -6,7 +6,6 @@ import styles from '../styles/RecomendationCard.module.css';
 
 export default function RecomendationCards({ page }) {
   const [recomendation, setRecomendation] = useState([]);
-  console.log(recomendation);
 
   useEffect(() => {
     const getApiRecipe = async () => {
