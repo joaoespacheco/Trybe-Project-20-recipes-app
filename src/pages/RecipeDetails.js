@@ -9,7 +9,8 @@ export default function RecipeDetails() {
   const [recipe, setRecipe] = useState([]);
   const [statusDone, setStatusDone] = useState(false);
   const [statusInProgress, setStatusInProgress] = useState(true);
-  const { location: { pathname } } = useHistory();
+  const history = useHistory();
+  const { location: { pathname } } = history;
   const path = pathname.split('/');
 
   const changeRecipe = (recipeApi) => {
@@ -68,16 +69,45 @@ export default function RecipeDetails() {
       const statusRecipe = recipesDone.some(({ id }) => (
         id === recipe.idMeal || id === recipe.idDrink
       ));
-      console.log(statusRecipe);
       setStatusDone(!statusRecipe);
       setStatusInProgress(false);
-      console.log('entrou no segundo if');
     } else {
       setStatusDone(true);
       setStatusInProgress(false);
-      console.log('entrou no else');
     }
   }, [recipe]);
+
+  const handleLocalStorage = () => {
+    const storage = localStorage.getItem('inProgressRecipes');
+    const inProgressStorage = storage ? JSON.parse(storage) : {
+      cocktails: {},
+      meals: {},
+    };
+    const currentRecipe = [];
+
+    if (path[1] === 'foods') {
+      const newStorage = {
+        ...inProgressStorage,
+        meals: {
+          ...inProgressStorage.meals,
+          [recipe.idMeal]: currentRecipe,
+        },
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
+    }
+
+    if (path[1] === 'drinks') {
+      const newStorage = {
+        ...inProgressStorage,
+        cockTails: {
+          ...inProgressStorage.cockTails,
+          [recipe.idDrink]: currentRecipe,
+        },
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
+    }
+    history.push(`${pathname}/in-progress`);
+  };
 
   return (
     <section>
@@ -90,6 +120,7 @@ export default function RecipeDetails() {
             type="button"
             data-testid="start-recipe-btn"
             style={ { position: 'fixed', bottom: '0' } }
+            onClick={ () => handleLocalStorage() }
           >
             Start Recipe
           </button>
@@ -102,6 +133,7 @@ export default function RecipeDetails() {
           type="button"
           data-testid="start-recipe-btn"
           style={ { position: 'fixed', bottom: '0' } }
+          onClick={ () => history.push(`${pathname}/in-progress`) }
         >
           Continue Recipe
         </button>
