@@ -4,8 +4,8 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 export default function Profile() {
-  const { email } = JSON.parse(localStorage.getItem('user'));
   const history = useHistory();
+  const { email } = JSON.parse(localStorage.getItem('user'));
 
   const logout = () => {
     localStorage.clear();
