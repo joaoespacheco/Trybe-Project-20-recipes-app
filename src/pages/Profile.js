@@ -7,6 +7,11 @@ export default function Profile() {
   const { email } = JSON.parse(localStorage.getItem('user'));
   const history = useHistory();
 
+  const logout = () => {
+    localStorage.clear();
+    history.push('/');
+  };
+
   return (
     <>
       <Header statusButton={ false } pageTitle="Profile" />
@@ -32,6 +37,7 @@ export default function Profile() {
         <button
           type="button"
           data-testid="profile-logout-btn"
+          onClick={ logout }
         >
           Logout
         </button>
