@@ -7,7 +7,8 @@ import getCockTailApi from '../services/CockTailApi';
 
 export default function RecipeDetails() {
   const [recipe, setRecipe] = useState([]);
-  const [statusButton, setStatusButton] = useState(true);
+  const [statusDone, setStatusDone] = useState(true);
+  const [statusInProgress, setStatusInProgress] = useState(false);
   const { location: { pathname } } = useHistory();
   const path = pathname.split('/');
 
@@ -57,13 +58,21 @@ export default function RecipeDetails() {
 
   useEffect(() => {
     const recipesDone = localStorage.getItem('doneRecipes');
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes && inProgressRecipes.meals[path[2]]) {
+      setStatusDone(false);
+      setStatusInProgress(true);
+    }
+    if (inProgressRecipes && inProgressRecipes.cocktails[path[2]]) {
+      setStatusDone(false);
+      setStatusInProgress(true);
+    }
     if (recipesDone) {
       const statusRecipe = JSON.parse(recipesDone).some(({ idMeal, idDrink }) => (
         idMeal === recipe.idMeal || idDrink === recipe.idDrink
       ));
-      setStatusButton(!statusRecipe);
-    } else {
-      setStatusButton(true);
+      setStatusDone(!statusRecipe);
+      setStatusInProgress(false);
     }
   }, [recipe]);
 
@@ -72,17 +81,28 @@ export default function RecipeDetails() {
       { recipe.idMeal && <MealRecipe recipe={ recipe } /> }
       { recipe.idDrink && <DrinkRecipe recipe={ recipe } /> }
       {
-        statusButton
+        statusDone
         && (
           <button
             type="button"
             data-testid="start-recipe-btn"
             style={ { position: 'fixed', bottom: '0' } }
           >
-            Start Recipe
+            {statusInProgress ? 'Continue Recipe' : 'Start Recipe' }
           </button>
         )
       }
+      {/* {
+        statusInProgress
+      && (
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+        >
+          Continue Recipe
+        </button>
+      )
+      } */}
     </section>
   );
 }
