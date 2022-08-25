@@ -7,8 +7,8 @@ import getCockTailApi from '../services/CockTailApi';
 
 export default function RecipeDetails() {
   const [recipe, setRecipe] = useState([]);
-  const [statusDone, setStatusDone] = useState(true);
-  const [statusInProgress, setStatusInProgress] = useState(false);
+  const [statusDone, setStatusDone] = useState(false);
+  const [statusInProgress, setStatusInProgress] = useState(true);
   const { location: { pathname } } = useHistory();
   const path = pathname.split('/');
 
@@ -57,22 +57,25 @@ export default function RecipeDetails() {
   }, []);
 
   useEffect(() => {
-    const recipesDone = localStorage.getItem('doneRecipes');
+    const recipesDone = JSON.parse(localStorage.getItem('doneRecipes'));
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (inProgressRecipes && inProgressRecipes.meals[path[2]]) {
+    if (inProgressRecipes && (
+      inProgressRecipes.meals[path[2]] || inProgressRecipes.cocktails[path[2]])) {
       setStatusDone(false);
       setStatusInProgress(true);
-    }
-    if (inProgressRecipes && inProgressRecipes.cocktails[path[2]]) {
-      setStatusDone(false);
-      setStatusInProgress(true);
-    }
-    if (recipesDone) {
-      const statusRecipe = JSON.parse(recipesDone).some(({ idMeal, idDrink }) => (
-        idMeal === recipe.idMeal || idDrink === recipe.idDrink
+      console.log('entrou no primeiro if');
+    } else if (recipesDone) {
+      const statusRecipe = recipesDone.some(({ id }) => (
+        id === recipe.idMeal || id === recipe.idDrink
       ));
+      console.log(statusRecipe);
       setStatusDone(!statusRecipe);
       setStatusInProgress(false);
+      console.log('entrou no segundo if');
+    } else {
+      setStatusDone(true);
+      setStatusInProgress(false);
+      console.log('entrou no else');
     }
   }, [recipe]);
 
@@ -88,21 +91,22 @@ export default function RecipeDetails() {
             data-testid="start-recipe-btn"
             style={ { position: 'fixed', bottom: '0' } }
           >
-            {statusInProgress ? 'Continue Recipe' : 'Start Recipe' }
+            Start Recipe
           </button>
         )
       }
-      {/* {
+      {
         statusInProgress
       && (
         <button
           type="button"
           data-testid="start-recipe-btn"
+          style={ { position: 'fixed', bottom: '0' } }
         >
           Continue Recipe
         </button>
       )
-      } */}
+      }
     </section>
   );
 }
