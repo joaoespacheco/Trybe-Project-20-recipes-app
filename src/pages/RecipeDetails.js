@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import MealRecipe from '../components/MealRecipe';
 import DrinkRecipe from '../components/DrinkRecipe';
 import getMealApi from '../services/MealApi';
 import getCockTailApi from '../services/CockTailApi';
+import shareIcon from '../images/shareIcon.svg';
 
 export default function RecipeDetails() {
   const [recipe, setRecipe] = useState([]);
   const [statusDone, setStatusDone] = useState([true]);
+  const [statusMessage, setStatusMessage] = useState(false);
+
   const history = useHistory();
   const { location: { pathname } } = history;
   const path = pathname.split('/');
@@ -94,6 +98,14 @@ export default function RecipeDetails() {
     }
     history.push(`${pathname}/in-progress`);
   };
+
+  const handleClickShare = () => {
+    const FIVE_SECONDS = 5000;
+    setStatusMessage(true);
+    copy(`http://localhost:3000${pathname}`);
+    setInterval(() => setStatusMessage(false), FIVE_SECONDS);
+  };
+
   return (
     <section>
       { recipe.idMeal && <MealRecipe recipe={ recipe } /> }
@@ -113,10 +125,21 @@ export default function RecipeDetails() {
       }
       <button
         type="button"
-        data-testid="share-btn"
+        onClick={ handleClickShare }
+        style={ { background: 'none', border: 'none', cursor: 'pointer' } }
       >
-        Compartilhar
+        <img
+          src={ shareIcon }
+          alt="Ícone de compartilhamento"
+          data-testid="share-btn"
+        />
       </button>
+      {statusMessage
+      && (
+        <span>
+          Link copied!
+        </span>
+      )}
       <button
         type="button"
         data-testid="favorite-btn"
