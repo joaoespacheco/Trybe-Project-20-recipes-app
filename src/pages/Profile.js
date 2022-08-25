@@ -16,9 +16,8 @@ export default function Profile() {
   return (
     <>
       <Header statusButton={ false } pageTitle="Profile" />
-      <section>
-        <h1 data-testid="profile-email">{ email }</h1>
-
+      <h1 data-testid="profile-email">{ email }</h1>
+      <nav>
         <button
           type="button"
           data-testid="profile-done-btn"
@@ -42,8 +41,7 @@ export default function Profile() {
         >
           Logout
         </button>
-
-      </section>
+      </nav>
       <Footer />
     </>
   );

@@ -12,10 +12,6 @@ describe('Testando a página Profile', () => {
     .mockReturnValue(JSON.stringify({ email: 'email@mail.com'}));
   });
 
-  afterEach(() => {
-    getUser = undefined;
-  })
-
   it('Verifica se o componente acessa a localStorage para recuperar o e-mail da pessoa usuária', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/profile');
@@ -26,7 +22,7 @@ describe('Testando a página Profile', () => {
 
   it('Verifica a renderização de elementos na tela', () => {
     const { history } = renderWithRouter(<App />);
-      
+
     history.push('/profile');
 
     const elements = [
