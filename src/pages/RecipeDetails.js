@@ -110,12 +110,14 @@ export default function RecipeDetails() {
         recipe={ recipe }
         handleClickShare={ handleClickShare }
         statusMessage={ statusMessage }
+        pageId={ path[2] }
       /> }
       { recipe.idDrink
       && <DrinkRecipe
         recipe={ recipe }
         handleClickShare={ handleClickShare }
         statusMessage={ statusMessage }
+        pageId={ path[2] }
       /> }
       {
         statusDone

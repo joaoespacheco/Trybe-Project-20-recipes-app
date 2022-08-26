@@ -5,7 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-export default function DrinkRecipe({ recipe, handleClickShare, statusMessage }) {
+export default function DrinkRecipe({ recipe, handleClickShare, statusMessage, pageId }) {
   const [buttonFavorite, setButtonFavorite] = useState(false);
   const { ingredients, mensures } = recipe;
 
@@ -42,7 +42,7 @@ export default function DrinkRecipe({ recipe, handleClickShare, statusMessage })
     const storage = localStorage.getItem('favoriteRecipes');
     const favoriteStorage = storage ? JSON.parse(storage) : [];
     return (favoriteStorage
-      .some(({ id }) => recipe.idDrink === id) ? blackHeartIcon : whiteHeartIcon);
+      .some(({ id }) => pageId === id) ? blackHeartIcon : whiteHeartIcon);
   };
   return (
     <section>
@@ -77,13 +77,13 @@ export default function DrinkRecipe({ recipe, handleClickShare, statusMessage })
       )}
             <button
               type="button"
-              data-testid="favorite-btn"
               onClick={ handleFavorite }
               style={ { background: 'none', border: 'none', cursor: 'pointer' } }
             >
               <img
                 src={ verifyFavoriteSave() }
                 alt="Ícone de favoritar"
+                data-testid="favorite-btn"
               />
             </button>
 
