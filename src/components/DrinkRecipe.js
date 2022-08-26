@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { objectOf, string, func, bool } from 'prop-types';
 import RecomendationCards from './RecomendationCard';
 import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function DrinkRecipe({ recipe, handleClickShare, statusMessage }) {
+  const [buttonFavorite, setButtonFavorite] = useState(false);
   const { ingredients, mensures } = recipe;
 
   const handleFavorite = () => {
@@ -32,8 +35,15 @@ export default function DrinkRecipe({ recipe, handleClickShare, statusMessage })
         [...favoriteStorage, currentFavorite],
       ));
     }
+    setButtonFavorite(!buttonFavorite);
   };
 
+  const verifyFavoriteSave = () => {
+    const storage = localStorage.getItem('favoriteRecipes');
+    const favoriteStorage = storage ? JSON.parse(storage) : [];
+    return (favoriteStorage
+      .some(({ id }) => recipe.idDrink === id) ? blackHeartIcon : whiteHeartIcon);
+  };
   return (
     <section>
       {
@@ -69,8 +79,12 @@ export default function DrinkRecipe({ recipe, handleClickShare, statusMessage })
               type="button"
               data-testid="favorite-btn"
               onClick={ handleFavorite }
+              style={ { background: 'none', border: 'none', cursor: 'pointer' } }
             >
-              Favoritar
+              <img
+                src={ verifyFavoriteSave() }
+                alt="Ícone de favoritar"
+              />
             </button>
 
             <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
