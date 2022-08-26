@@ -90,10 +90,10 @@ export default function DrinkInProgress({
 
             <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
 
-            <ul data-testid="ingredient-step">
+            <ul>
               {ingredients.map((ingredient, index) => (
                 <li
-                  data-testid={ `${index}-ingredient-step` }
+                  data-testid="ingredient-step"
                   key={ `${index}-ingredient-step` }
                 >
                   { `${ingredient} - ${mensures[index]}` }
