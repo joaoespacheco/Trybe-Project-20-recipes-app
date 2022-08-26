@@ -11,6 +11,7 @@ export default function DrinkInProgress({
   statusMessage,
 }) {
   const [buttonFavorite, setButtonFavorite] = useState(false);
+  // const [saveStorage, setSaveStorage] = useState({});
   const { ingredients, mensures } = recipe;
 
   const handleFavorite = () => {
@@ -44,6 +45,13 @@ export default function DrinkInProgress({
     return (favoriteStorage
       .some(({ id }) => pageId === id) ? blackHeartIcon : whiteHeartIcon);
   };
+
+  // const verifyStorage = () => {
+  //   const storage = localStorage.getItem('inProgressRecipes');
+  //   if (saveStorage.idMeal || saveStorage.idDrink) {
+  //     console.log('');
+  //   }
+  // };
 
   return (
     <section>
@@ -90,16 +98,23 @@ export default function DrinkInProgress({
 
             <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
 
-            <ul>
+            <div>
               {ingredients.map((ingredient, index) => (
-                <li
+                <label
+                  htmlFor={ ingredient }
                   data-testid="ingredient-step"
                   key={ `${index}-ingredient-step` }
                 >
+                  <input
+                    data-testid={ `${index}-ingredient-step` }
+                    id={ ingredient }
+                    type="checkbox"
+                    // checked={  }
+                  />
                   { `${ingredient} - ${mensures[index]}` }
-                </li>
+                </label>
               ))}
-            </ul>
+            </div>
 
             <p data-testid="instructions">{ recipe.strInstructions }</p>
 
