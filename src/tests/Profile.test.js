@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from './helpers/renderWithRouter'
@@ -16,7 +16,7 @@ describe('Testando a página Profile', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/profile');
 
-    expect(getUser).toHaveBeenCalledTimes(1);
+    expect(getUser).toHaveBeenCalled();
     expect(getUser).toHaveBeenCalledWith('user');
   });
 
@@ -63,11 +63,13 @@ describe('Testando a página Profile', () => {
 
   it('Verifica a funcionabilidade dos botões da página de Profile (Logout)', () => {
     const { history } = renderWithRouter(<App />);
+    const clearStorage = jest.spyOn(Storage.prototype, 'clear')
 
       history.push('/profile')
       userEvent.click(screen.getByTestId('profile-logout-btn'))
 
       expect(history.location.pathname).toBe('/');
+      expect(clearStorage).toHaveBeenCalledTimes(1);
   });
 
 });
