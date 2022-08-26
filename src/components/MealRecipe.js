@@ -7,6 +7,30 @@ export default function MealRecipe({ recipe, handleClickShare, statusMessage }) 
   const { ingredients, mensures } = recipe;
   const idVideo = recipe.strYoutube.split('=')[1];
 
+  const handleFavorite = () => {
+    const { idMeal, strArea, strCategory, strMeal, strMealThumb } = recipe;
+    const storage = localStorage.getItem('favoriteRecipes');
+    const favoriteStorage = storage ? JSON.parse(storage) : [];
+    const favoriteStatus = favoriteStorage.some(({ id }) => recipe.idMeal === id);
+    if (favoriteStatus) {
+      const newFavorites = favoriteStorage.filter(({ id }) => recipe.idMeal !== id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+    } else {
+      const currentFavorite = {
+        id: idMeal,
+        type: 'food',
+        nationality: strArea,
+        category: strCategory,
+        alcoholicOrNot: '',
+        name: strMeal,
+        image: strMealThumb,
+      };
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        [...favoriteStorage, currentFavorite],
+      ));
+    }
+  };
+
   return (
     <section>
       {
@@ -41,6 +65,7 @@ export default function MealRecipe({ recipe, handleClickShare, statusMessage }) 
             <button
               type="button"
               data-testid="favorite-btn"
+              onClick={ handleFavorite }
             >
               Favoritar
             </button>

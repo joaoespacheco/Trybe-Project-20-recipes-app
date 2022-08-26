@@ -5,6 +5,35 @@ import shareIcon from '../images/shareIcon.svg';
 
 export default function DrinkRecipe({ recipe, handleClickShare, statusMessage }) {
   const { ingredients, mensures } = recipe;
+
+  const handleFavorite = () => {
+    const { idDrink,
+      strCategory,
+      strDrink,
+      strDrinkThumb,
+      strAlcoholic } = recipe;
+    const storage = localStorage.getItem('favoriteRecipes');
+    const favoriteStorage = storage ? JSON.parse(storage) : [];
+    const favoriteStatus = favoriteStorage.some(({ id }) => recipe.idDrink === id);
+    if (favoriteStatus) {
+      const newFavorites = favoriteStorage.filter(({ id }) => recipe.idDrink !== id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+    } else {
+      const currentFavorite = {
+        id: idDrink,
+        type: 'drink',
+        nationality: '',
+        category: strCategory,
+        alcoholicOrNot: strAlcoholic,
+        name: strDrink,
+        image: strDrinkThumb,
+      };
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        [...favoriteStorage, currentFavorite],
+      ));
+    }
+  };
+
   return (
     <section>
       {
@@ -39,6 +68,7 @@ export default function DrinkRecipe({ recipe, handleClickShare, statusMessage })
             <button
               type="button"
               data-testid="favorite-btn"
+              onClick={ handleFavorite }
             >
               Favoritar
             </button>

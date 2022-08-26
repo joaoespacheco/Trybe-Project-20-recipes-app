@@ -66,7 +66,6 @@ describe('Verificando a page RecipeDetails', () => {
     const recipeCategory = screen.queryByTestId('recipe-category');
     const instructions = screen.queryByTestId('instructions');
     const recipeVideo = screen.queryByTestId('video');
-    const button = screen.queryByTestId('start-recipe-btn');
     const recommendedDrink = screen.queryByTestId('0-recomendation-title');
 
     expect(recipeTitle).toHaveTextContent('Yellow Bird');
@@ -74,7 +73,6 @@ describe('Verificando a page RecipeDetails', () => {
     expect(recipeCategory).toBeInTheDocument();
     expect(instructions).toBeInTheDocument();
     expect(recipeVideo).toBeNull();
-    expect(button).toBeInTheDocument();
     expect(recommendedDrink).toBeInTheDocument();
   });
 
