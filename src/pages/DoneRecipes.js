@@ -8,7 +8,6 @@ export default function DoneRecipes() {
   useEffect(() => {
     const storage = localStorage.getItem('doneRecipes');
     const data = storage ? JSON.parse(storage) : [];
-    // console.log(data);
     setList(data);
   }, []);
 
@@ -17,7 +16,7 @@ export default function DoneRecipes() {
       <Header statusButton={ false } pageTitle="Done Recipes" />
       <section>
         <FilterButtons />
-        { list.map((item, index) => (
+        { list[0] && list.map((item, index) => (
           <div key={ index }>
             <img
               data-testid={ `${index}-horizontal-image` }
@@ -28,7 +27,9 @@ export default function DoneRecipes() {
             <p
               data-testid={ `${index}-horizontal-top-text` }
             >
-              { `${item.nationality} - ${item.category}` }
+              { item.type === 'food'
+                ? `${item.nationality} - ${item.category}`
+                : `${item.alcoholicOrNot}` }
             </p>
             <p data-testid={ `${index}-horizontal-name` }>{ item.name }</p>
             <p data-testid={ `${index}-horizontal-done-date` }>{ item.doneDate }</p>
