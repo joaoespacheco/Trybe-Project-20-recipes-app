@@ -8,7 +8,7 @@ import getCockTailApi from '../services/CockTailApi';
 
 export default function RecipeDetails() {
   const [recipe, setRecipe] = useState([]);
-  const [statusDone, setStatusDone] = useState([true]);
+  const [statusDone, setStatusDone] = useState(true);
   const [statusMessage, setStatusMessage] = useState(false);
 
   const history = useHistory();
@@ -19,13 +19,16 @@ export default function RecipeDetails() {
     cocktails: {},
     meals: {},
   };
+
   const verifyStatus = () => {
     if (path[1] === 'foods') {
       return !!inProgressStorage.meals[path[2]];
     }
     return !!inProgressStorage.cocktails[path[2]];
   };
+
   const statusInProgress = verifyStatus();
+
   const changeRecipe = (recipeApi) => {
     const recipeEntries = Object.entries(recipeApi);
     const changedEntries = recipeEntries.filter(([chave, valor]) => (
@@ -52,6 +55,7 @@ export default function RecipeDetails() {
     mensureArray.forEach((mensure) => mensures.push(mensure[1]));
     return newRecipe;
   };
+
   useEffect(() => {
     const getApiRecipe = async () => {
       const recipeResponse = path[1] === 'foods' ? await getMealApi('recipe', path[2])
@@ -62,17 +66,19 @@ export default function RecipeDetails() {
     };
     getApiRecipe();
   }, []);
+
   useEffect(() => {
     const handleStatusDone = () => {
       const doneLocalStorage = localStorage.getItem('doneRecipes');
       const doneStorage = doneLocalStorage ? JSON.parse(doneLocalStorage) : [];
       const newStatus = doneStorage.some(({ id }) => (
-        id === recipe.idMeal || id === recipe.idDrink
+        id === path[2]
       ));
       setStatusDone(!newStatus);
     };
     handleStatusDone();
   }, [recipe]);
+
   const handleLocalStorage = () => {
     const currentRecipe = [];
     if (path[1] === 'foods') {

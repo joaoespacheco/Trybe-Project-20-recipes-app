@@ -6,6 +6,8 @@ import App from '../App';
 import mockFoodName from './mocks/mockFoodName';
 import mockDrinkFirstLetter from './mocks/mockDrinkFirstLetter';
 
+jest.mock('clipboard-copy');
+
 describe('Verificando a page RecipeDetails', () => {
   it('Verifica se os componentes são renderizados', async () => {
     const { history } = renderWithRouter(<App/>);
@@ -111,11 +113,91 @@ describe('Verificando a page RecipeDetails', () => {
     expect(recipeCategory).toBeInTheDocument();
     expect(instructions).toBeInTheDocument();
     expect(recipeVideo).toBeNull();
-    expect(button).toBeNull();
+    expect(button).toBeInTheDocument()
     expect(recommendedDrink).toBeInTheDocument();
   });
-});
-//   // it('', () => {
+    it('Verificando os botões de favorito no "/foods"', async () => {
+      const { history } = renderWithRouter(<App/>);
+      history.push('/foods/53039');
 
-//   // });
-// });
+      jest.spyOn(global, 'fetch')
+      global.fetch
+      .mockReturnValue({
+        json: jest.fn().mockResolvedValue(mockDrinkFirstLetter),
+      })
+      .mockReturnValueOnce({
+        json: jest.fn().mockResolvedValue(mockFoodName),
+      });
+  
+      await waitFor (() => {
+        expect(fetch).toHaveBeenCalledWith('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      });
+    
+      const buttonShare = screen.getByTestId('share-btn');
+      const buttonFavorite = screen.getByTestId('favorite-btn');
+
+      expect(buttonShare).toBeInTheDocument();
+      expect(buttonFavorite).toBeInTheDocument();
+
+      userEvent.click(buttonFavorite);
+
+      expect(buttonFavorite).toHaveAttribute('src', 'blackHeartIcon.svg');
+  });
+it('Verificando os botões de favorito no "/foods"', async () => {
+  const { history } = renderWithRouter(<App/>);
+  history.push('/foods/53039');
+
+  jest.spyOn(global, 'fetch')
+  global.fetch
+  .mockReturnValue({
+    json: jest.fn().mockResolvedValue(mockDrinkFirstLetter),
+  })
+  .mockReturnValueOnce({
+    json: jest.fn().mockResolvedValue(mockFoodName),
+  });
+
+  await waitFor (() => {
+    expect(fetch).toHaveBeenCalledWith('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  });
+
+  const buttonStartRecipe = screen.getByTestId('start-recipe-btn');
+
+  expect(buttonStartRecipe).toBeInTheDocument();
+
+  userEvent.click(buttonStartRecipe);
+
+  expect(history.location.pathname).toBe('/foods/53039/in-progress');
+});
+it('Verificando os botões de favorito no "/drinks', async () => {
+      const { history } = renderWithRouter(<App/>);
+      history.push('/drinks/17219');
+
+      jest.spyOn(global, 'fetch')
+      global.fetch
+      .mockReturnValue({
+        json: jest.fn().mockResolvedValue(mockFoodName),
+      })
+      .mockReturnValueOnce({
+        json: jest.fn().mockResolvedValue(mockDrinkFirstLetter),
+      });
+  
+      await waitFor (() => {
+        expect(fetch).toHaveBeenCalledWith('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      });
+    
+      const buttonShare = screen.getByTestId('share-btn');
+      const buttonFavorite = screen.getByTestId('favorite-btn');
+  
+      expect(buttonShare).toBeInTheDocument();
+      expect(buttonFavorite).toBeInTheDocument();
+  
+      userEvent.click(buttonFavorite);
+      userEvent.click(buttonShare);
+  
+      expect(buttonFavorite).toHaveAttribute('src', 'blackHeartIcon.svg');
+      expect(screen.getByText('Link copied!')).toBeInTheDocument();
+  
+  });
+
+});
+

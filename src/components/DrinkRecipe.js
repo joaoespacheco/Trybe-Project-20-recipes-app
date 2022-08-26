@@ -17,9 +17,9 @@ export default function DrinkRecipe({ recipe, handleClickShare, statusMessage, p
       strAlcoholic } = recipe;
     const storage = localStorage.getItem('favoriteRecipes');
     const favoriteStorage = storage ? JSON.parse(storage) : [];
-    const favoriteStatus = favoriteStorage.some(({ id }) => recipe.idDrink === id);
+    const favoriteStatus = favoriteStorage.some(({ id }) => pageId === id);
     if (favoriteStatus) {
-      const newFavorites = favoriteStorage.filter(({ id }) => recipe.idDrink !== id);
+      const newFavorites = favoriteStorage.filter(({ id }) => pageId !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
     } else {
       const currentFavorite = {

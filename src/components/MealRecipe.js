@@ -14,9 +14,9 @@ export default function MealRecipe({ recipe, handleClickShare, statusMessage, pa
     const { idMeal, strArea, strCategory, strMeal, strMealThumb } = recipe;
     const storage = localStorage.getItem('favoriteRecipes');
     const favoriteStorage = storage ? JSON.parse(storage) : [];
-    const favoriteStatus = favoriteStorage.some(({ id }) => recipe.idMeal === id);
+    const favoriteStatus = favoriteStorage.some(({ id }) => pageId === id);
     if (favoriteStatus) {
-      const newFavorites = favoriteStorage.filter(({ id }) => recipe.idMeal !== id);
+      const newFavorites = favoriteStorage.filter(({ id }) => pageId !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
     } else {
       const currentFavorite = {
