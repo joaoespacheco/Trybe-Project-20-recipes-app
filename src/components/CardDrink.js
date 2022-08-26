@@ -7,7 +7,7 @@ export default function CardDrink() {
   const maxCardNumbers = 12;
   const recipes = recipesList.filter((_recipe, index) => index < maxCardNumbers);
   return (
-    <div>
+    <div style={ { display: 'flex', flexDirection: 'row', flexWrap: 'wrap' } }>
       {recipes.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
         <Link
           to={ `/drinks/${idDrink}` }
@@ -16,6 +16,7 @@ export default function CardDrink() {
           <div data-testid={ `${index}-recipe-card` }>
             <img
               src={ strDrinkThumb }
+              style={ { width: '150px', padding: '0 10px' } }
               alt={ strDrink }
               data-testid={ `${index}-card-img` }
             />

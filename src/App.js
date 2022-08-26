@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import Foods from './pages/Foods';
 import Drinks from './pages/Drinks';
-import RecipeDetail from './pages/RecipeDetail';
+import RecipeDetails from './pages/RecipeDetails';
 import RecipeInProgress from './pages/RecipeInProgress';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
@@ -20,8 +20,8 @@ function App() {
         <Route path="/profile" component={ Profile } />
         <Route path="/drinks/:id/in-progress" component={ RecipeInProgress } />
         <Route path="/foods/:id/in-progress" component={ RecipeInProgress } />
-        <Route path="/drinks/:id" component={ RecipeDetail } />
-        <Route path="/foods/:id" component={ RecipeDetail } />
+        <Route path="/drinks/:id" component={ RecipeDetails } />
+        <Route path="/foods/:id" component={ RecipeDetails } />
         <Route path="/drinks" component={ Drinks } />
         <Route path="/foods" component={ Foods } />
         <Route exact path="/" component={ Login } />

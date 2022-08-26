@@ -3,6 +3,7 @@ const CATEGORY_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?
 const NAME_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const INGREDIENT_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const FILTER_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
+const RECIPE_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
 
 const filterEndpoint = (type, endpoint) => {
   switch (type) {
@@ -14,6 +15,8 @@ const filterEndpoint = (type, endpoint) => {
     return (FILTER_ENDPOINT + endpoint);
   case 'ingredient':
     return (INGREDIENT_ENDPOINT + endpoint);
+  case 'recipe':
+    return (RECIPE_ENDPOINT + endpoint);
   default:
     return ('');
   }

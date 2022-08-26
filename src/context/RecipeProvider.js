@@ -13,19 +13,21 @@ function RecipeProvider({ children }) {
   const getFoodApi = async (radio, search) => {
     const { meals, categoryMeals } = await getMealApi(radio, search);
     if (!meals) {
-      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    } else {
+      setRecipesList(meals);
+      setCategories(categoryMeals);
     }
-    setRecipesList(meals);
-    setCategories(categoryMeals);
   };
 
   const getDrinkApi = async (radio, search) => {
     const { drinks, categoryDrinks } = await getCockTailApi(radio, search);
     if (!drinks) {
-      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    } else {
+      setRecipesList(drinks);
+      setCategories(categoryDrinks);
     }
-    setRecipesList(drinks);
-    setCategories(categoryDrinks);
   };
 
   const handleFoodsAndDriks = (page, radio, search) => {

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { string } from 'prop-types';
 import RecipeContext from '../context/RecipeContext';
 
-export default function CategoriesButtons({ page }) {
+export default function Categories({ page }) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const {
     categories,
@@ -27,10 +27,10 @@ export default function CategoriesButtons({ page }) {
 
   return (
     <div>
-      { availableCategories.map(({ strCategory }) => (
+      { availableCategories.map(({ strCategory }, index) => (
         <button
           type="button"
-          key={ strCategory }
+          key={ `${strCategory}-${index}` }
           name={ strCategory }
           data-testid={ `${strCategory}-category-filter` }
           onClick={ () => setFilter('filter', strCategory) }
@@ -49,6 +49,6 @@ export default function CategoriesButtons({ page }) {
   );
 }
 
-CategoriesButtons.propTypes = {
+Categories.propTypes = {
   page: string,
 }.isRequired;
