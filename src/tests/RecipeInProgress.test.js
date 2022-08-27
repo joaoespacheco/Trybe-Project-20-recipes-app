@@ -113,6 +113,11 @@ describe('Verificando a page RecipeDetails', () => {
     expect(screen.getByTestId('input-drinks-0').checked).not.toBeTruthy();
     expect(screen.getByTestId('input-drinks-1').checked).toBeTruthy();
 
+
+    userEvent.click(ingredientList[0])
+    userEvent.click(ingredientList[2])
+    userEvent.click(ingredientList[3])
+
     userEvent.click(finishButton)
     expect(history.location.pathname).toBe('/done-recipes');
   })
@@ -147,6 +152,23 @@ describe('Verificando a page RecipeDetails', () => {
 
     expect(screen.getByTestId('input-foods-0').checked).not.toBeTruthy();
     expect(screen.getByTestId('input-foods-5').checked).toBeTruthy();
+
+    userEvent.click(ingredientList[0])
+    userEvent.click(ingredientList[1])
+    userEvent.click(ingredientList[2])
+    userEvent.click(ingredientList[3])
+    userEvent.click(ingredientList[4])
+    userEvent.click(ingredientList[6])
+    userEvent.click(ingredientList[8])
+    userEvent.click(ingredientList[9])
+    userEvent.click(ingredientList[10])
+    userEvent.click(ingredientList[11])
+    userEvent.click(ingredientList[12])
+    userEvent.click(ingredientList[13])
+    userEvent.click(ingredientList[14])
+    userEvent.click(ingredientList[15])
+    userEvent.click(ingredientList[16])
+
 
     userEvent.click(finishButton)
     expect(history.location.pathname).toBe('/done-recipes');

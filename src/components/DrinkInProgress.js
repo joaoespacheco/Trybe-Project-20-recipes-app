@@ -126,6 +126,22 @@ export default function DrinkInProgress({
     }
   };
 
+  const verifyChecks = () => {
+    const storage = localStorage.getItem('inProgressRecipes');
+    const inProgressStorage = storage ? JSON.parse(storage) : {
+      cocktails: { [pageId]: [] },
+      meals: { },
+    };
+    const { cocktails } = inProgressStorage;
+    if (cocktails[pageId]) {
+      const status = !ingredients.every(
+        (ingredient) => cocktails[pageId].includes(ingredient),
+      );
+      return status;
+    }
+    return true;
+  };
+
   useEffect(() => {
     const storage = localStorage.getItem('inProgressRecipes');
     const inProgressStorage = storage ? JSON.parse(storage) : {
@@ -215,6 +231,8 @@ export default function DrinkInProgress({
               type="button"
               data-testid="finish-recipe-btn"
               onClick={ () => history.push('/done-recipes') }
+              style={ { position: 'fixed', bottom: '0' } }
+              disabled={ verifyChecks() }
             >
               Finalizar Receita
             </button>

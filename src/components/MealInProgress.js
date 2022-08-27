@@ -128,6 +128,22 @@ export default function MealInProgress({
     }
   };
 
+  const verifyChecks = () => {
+    const storage = localStorage.getItem('inProgressRecipes');
+    const inProgressStorage = storage ? JSON.parse(storage) : {
+      cocktails: {},
+      meals: { [pageId]: [] },
+    };
+    const { meals } = inProgressStorage;
+    if (meals[pageId]) {
+      const status = !ingredients.every(
+        (ingredient) => meals[pageId].includes(ingredient),
+      );
+      return status;
+    }
+    return true;
+  };
+
   useEffect(() => {
     const storage = localStorage.getItem('inProgressRecipes');
     const inProgressStorage = storage ? JSON.parse(storage) : {
@@ -179,9 +195,7 @@ export default function MealInProgress({
                 data-testid="favorite-btn"
               />
             </button>
-
             <p data-testid="recipe-category">{ recipe.strCategory }</p>
-
             {ingredients.map((ingredient, index) => (
               <label
                 data-testid={ `${index}-ingredient-step` }
@@ -211,13 +225,13 @@ export default function MealInProgress({
                 </span>
               </label>
             ))}
-
             <p data-testid="instructions">{ recipe.strInstructions }</p>
-
             <button
               type="button"
               data-testid="finish-recipe-btn"
               onClick={ () => history.push('/done-recipes') }
+              style={ { position: 'fixed', bottom: '0' } }
+              disabled={ verifyChecks() }
             >
               Finalizar Receita
             </button>
