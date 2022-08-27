@@ -47,6 +47,46 @@ export default function RecipeInProgress() {
     copy(`http://localhost:3000${endPoint}`);
   };
 
+  const handleDoneStorage = () => {
+    const storage = localStorage.getItem('doneRecipes');
+    const doneRecipesStorage = storage ? JSON.parse(storage) : [];
+    const tags = recipe.strTags ? recipe.strTags.split(',') : [];
+
+    if (path[1] === 'foods') {
+      const newRecipe = {
+        id: recipe.idMeal,
+        type: 'food',
+        nationality: recipe.strArea,
+        category: recipe.strCategory,
+        alcoholicOrNot: '',
+        name: recipe.strMeal,
+        image: recipe.strMealThumb,
+        doneDate: new Date().toLocaleDateString(),
+        tags,
+      };
+      localStorage.setItem(
+        'doneRecipes', JSON.stringify([...doneRecipesStorage, newRecipe]),
+      );
+      history.push('/done-recipes');
+    } else {
+      const newRecipe = {
+        id: recipe.idDrink,
+        type: 'drink',
+        nationality: '',
+        category: recipe.strCategory,
+        alcoholicOrNot: recipe.strAlcoholic,
+        name: recipe.strDrink,
+        image: recipe.strDrinkThumb,
+        doneDate: new Date().toLocaleDateString(),
+        tags: [],
+      };
+      localStorage.setItem(
+        'doneRecipes', JSON.stringify([...doneRecipesStorage, newRecipe]),
+      );
+      history.push('/done-recipes');
+    }
+  };
+
   useEffect(() => {
     const getApiRecipe = async () => {
       const recipeResponse = path[1] === 'foods' ? await getMealApi('recipe', path[2])
@@ -67,6 +107,7 @@ export default function RecipeInProgress() {
             pageId={ path[2] }
             statusMessage={ statusMessage }
             handleClickShare={ handleClickShare }
+            handleDoneStorage={ handleDoneStorage }
           />
         )
       }
@@ -77,6 +118,7 @@ export default function RecipeInProgress() {
             pageId={ path[2] }
             statusMessage={ statusMessage }
             handleClickShare={ handleClickShare }
+            handleDoneStorage={ handleDoneStorage }
           />
         )
       }

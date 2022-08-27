@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { objectOf, string, func, bool } from 'prop-types';
-import { useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -10,6 +9,7 @@ export default function DrinkInProgress({
   pageId,
   handleClickShare,
   statusMessage,
+  handleDoneStorage,
 }) {
   const [buttonFavorite, setButtonFavorite] = useState(false);
   const [saveStorage, setSaveStorage] = useState({
@@ -17,8 +17,6 @@ export default function DrinkInProgress({
     meals: {},
   });
   const { ingredients, mensures } = recipe;
-
-  const history = useHistory();
 
   const handleFavorite = () => {
     const { idDrink, strCategory, strDrink, strDrinkThumb, strAlcoholic } = recipe;
@@ -157,14 +155,12 @@ export default function DrinkInProgress({
         !!recipe && (
           <>
             <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
-
             <img
               data-testid="recipe-photo"
               src={ recipe.strDrinkThumb }
               alt={ recipe.strDrink }
               style={ { width: '150px', padding: '0 10px' } }
             />
-
             <button
               type="button"
               onClick={ handleClickShare }
@@ -193,9 +189,7 @@ export default function DrinkInProgress({
                 data-testid="favorite-btn"
               />
             </button>
-
             <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
-
             {ingredients.map((ingredient, index) => (
               <label
                 data-testid={ `${index}-ingredient-step` }
@@ -224,13 +218,11 @@ export default function DrinkInProgress({
                 </span>
               </label>
             ))}
-
             <p data-testid="instructions">{ recipe.strInstructions }</p>
-
             <button
               type="button"
               data-testid="finish-recipe-btn"
-              onClick={ () => history.push('/done-recipes') }
+              onClick={ handleDoneStorage }
               style={ { position: 'fixed', bottom: '0' } }
               disabled={ verifyChecks() }
             >
@@ -239,7 +231,6 @@ export default function DrinkInProgress({
           </>
         )
       }
-
     </section>
   );
 }

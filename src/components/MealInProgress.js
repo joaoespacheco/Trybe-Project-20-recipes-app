@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { objectOf, string, func, bool } from 'prop-types';
-import { useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -10,6 +9,7 @@ export default function MealInProgress({
   pageId,
   handleClickShare,
   statusMessage,
+  handleDoneStorage,
 }) {
   const [buttonFavorite, setButtonFavorite] = useState(false);
   const [saveStorage, setSaveStorage] = useState({
@@ -18,8 +18,6 @@ export default function MealInProgress({
   });
 
   const { ingredients, mensures } = recipe;
-
-  const history = useHistory();
 
   const handleFavorite = () => {
     const { idMeal, strArea, strCategory, strMeal, strMealThumb } = recipe;
@@ -159,14 +157,12 @@ export default function MealInProgress({
         !!recipe && (
           <>
             <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
-
             <img
               data-testid="recipe-photo"
               src={ recipe.strMealThumb }
               alt={ recipe.strMeal }
               style={ { width: '150px', padding: '0 10px' } }
             />
-
             <button
               type="button"
               onClick={ handleClickShare }
@@ -221,7 +217,6 @@ export default function MealInProgress({
                   ) : (
                     'Unmeasured'
                   )}` }
-
                 </span>
               </label>
             ))}
@@ -229,17 +224,15 @@ export default function MealInProgress({
             <button
               type="button"
               data-testid="finish-recipe-btn"
-              onClick={ () => history.push('/done-recipes') }
+              onClick={ handleDoneStorage }
               style={ { position: 'fixed', bottom: '0' } }
               disabled={ verifyChecks() }
             >
               Finalizar Receita
             </button>
-
           </>
         )
       }
-
     </section>
   );
 }
