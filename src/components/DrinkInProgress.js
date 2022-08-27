@@ -182,7 +182,7 @@ export default function DrinkInProgress({
 
             {ingredients.map((ingredient, index) => (
               <label
-                data-testid="ingredient-step"
+                data-testid={ `${index}-ingredient-step` }
                 htmlFor={ ingredient }
                 key={ `${index}-ingredient-step` }
               >
@@ -193,11 +193,19 @@ export default function DrinkInProgress({
                   checked={ verifyStorage(ingredient) }
                   onChange={ () => handleIngredient(ingredient) }
                 />
-                { `${ingredient} - ${mensures[index] ? (
-                  mensures[index]
-                ) : (
-                  'Unmeasured'
-                )}` }
+                <span
+                  style={
+                    { textDecoration: (
+                      verifyStorage(ingredient) ? 'line-through' : 'none'
+                    ) }
+                  }
+                >
+                  { `${ingredient} - ${mensures[index] ? (
+                    mensures[index]
+                  ) : (
+                    'Unmeasured'
+                  )}` }
+                </span>
               </label>
             ))}
 

@@ -29,7 +29,7 @@ describe('Verificando a page RecipeDetails', () => {
     const recipePhoto = screen.getByTestId('recipe-photo');
     const recipeCategory = screen.getByTestId('recipe-category');
     const instructions = screen.getByTestId('instructions');
-    const ingredientList = screen.getAllByTestId('ingredient-step');
+    const ingredientList = screen.getAllByTestId(/ingredient-step/i);
     const Finishbutton = screen.getByTestId('finish-recipe-btn');
     const sharebutton = screen.getByTestId('share-btn');
     const favoritebutton = screen.getByTestId('favorite-btn');
@@ -65,7 +65,7 @@ describe('Verificando a page RecipeDetails', () => {
     const recipePhoto = screen.getByTestId('recipe-photo');
     const recipeCategory = screen.getByTestId('recipe-category');
     const instructions = screen.getByTestId('instructions');
-    const ingredientList = screen.getAllByTestId('ingredient-step');
+    const ingredientList = screen.getAllByTestId(/ingredient-step/i);
     const Finishbutton = screen.getByTestId('finish-recipe-btn');
     const sharebutton = screen.getByTestId('share-btn');
     const favoritebutton = screen.getByTestId('favorite-btn');
@@ -97,8 +97,8 @@ describe('Verificando a page RecipeDetails', () => {
       expect(fetch).toHaveBeenCalled();
     });
 
-    const ingredientLabel = screen.getAllByTestId('ingredient-step');
-    const Finishbutton = screen.getByTestId('finish-recipe-btn');
+    const ingredientList = screen.getAllByTestId(/ingredient-step/i);
+    const finishButton = screen.getByTestId('finish-recipe-btn');
     const sharebutton = screen.getByTestId('share-btn');
     const favoritebutton = screen.getByTestId('favorite-btn');
 
@@ -108,12 +108,12 @@ describe('Verificando a page RecipeDetails', () => {
     userEvent.click(sharebutton);
     expect(screen.getByText('Link copied!')).toBeInTheDocument();
 
-    userEvent.click(ingredientLabel[1])
+    userEvent.click(ingredientList[1])
 
     expect(screen.getByTestId('input-drinks-0').checked).not.toBeTruthy();
     expect(screen.getByTestId('input-drinks-1').checked).toBeTruthy();
 
-    userEvent.click(Finishbutton)
+    userEvent.click(finishButton)
     expect(history.location.pathname).toBe('/done-recipes');
   })
 
@@ -132,7 +132,7 @@ describe('Verificando a page RecipeDetails', () => {
       expect(fetch).toHaveBeenCalled();
     });
 
-    const ingredientLabel = screen.getAllByTestId('ingredient-step');
+    const ingredientList = screen.getAllByTestId(/ingredient-step/i);
     const finishButton = screen.getByTestId('finish-recipe-btn');
     const sharebutton = screen.getByTestId('share-btn');
     const favoritebutton = screen.getByTestId('favorite-btn');
@@ -143,7 +143,7 @@ describe('Verificando a page RecipeDetails', () => {
     userEvent.click(sharebutton);
     expect(screen.getByText('Link copied!')).toBeInTheDocument();
 
-    userEvent.click(ingredientLabel[5])
+    userEvent.click(ingredientList[5])
 
     expect(screen.getByTestId('input-foods-0').checked).not.toBeTruthy();
     expect(screen.getByTestId('input-foods-5').checked).toBeTruthy();
