@@ -167,9 +167,15 @@ describe('Verificando a page RecipeDetails', () => {
 
     expect(buttonStartRecipe).toBeInTheDocument();
 
-    // userEvent.click(buttonStartRecipe);
+    jest.spyOn(global, 'fetch')
+    global.fetch
+    .mockReturnValue({
+      json: jest.fn().mockResolvedValue(mockFoodName),
+    });
 
-    // expect(history.location.pathname).toBe('/foods/53039/in-progress');
+    userEvent.click(buttonStartRecipe);
+
+    expect(history.location.pathname).toBe('/foods/53039/in-progress');
   });
 
   it('Verificando os botões de favorito no "/drinks', async () => {
