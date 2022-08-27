@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { objectOf, string, func, bool } from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -17,8 +18,10 @@ export default function DrinkInProgress({
   });
   const { ingredients, mensures } = recipe;
 
+  const history = useHistory();
+
   const handleFavorite = () => {
-    const { idMeal, strArea, strCategory, strMeal, strMealThumb } = recipe;
+    const { idDrink, strCategory, strDrink, strDrinkThumb, strAlcoholic } = recipe;
     const storage = localStorage.getItem('favoriteRecipes');
     const favoriteStorage = storage ? JSON.parse(storage) : [];
     const favoriteStatus = favoriteStorage.some(({ id }) => pageId === id);
@@ -27,13 +30,13 @@ export default function DrinkInProgress({
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
     } else {
       const currentFavorite = {
-        id: idMeal,
-        type: 'food',
-        nationality: strArea,
+        id: idDrink,
+        type: 'drink',
+        nationality: '',
         category: strCategory,
-        alcoholicOrNot: '',
-        name: strMeal,
-        image: strMealThumb,
+        alcoholicOrNot: strAlcoholic,
+        name: strDrink,
+        image: strDrinkThumb,
       };
       localStorage.setItem('favoriteRecipes', JSON.stringify(
         [...favoriteStorage, currentFavorite],
@@ -75,7 +78,7 @@ export default function DrinkInProgress({
   const handleIngredient = (currentIngredient) => {
     const storage = localStorage.getItem('inProgressRecipes');
     const inProgressStorage = storage ? JSON.parse(storage) : {
-      cocktails: {},
+      cocktails: { [pageId]: [] },
       meals: {},
     };
     const { cocktails, meals } = inProgressStorage;
@@ -110,6 +113,16 @@ export default function DrinkInProgress({
         localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
         setSaveStorage(newStorage);
       }
+    } else if (!cocktails[pageId]) {
+      const newStorage = {
+        meals: { ...meals },
+        cocktails: {
+          ...cocktails,
+          [pageId]: [currentIngredient],
+        },
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
+      setSaveStorage(newStorage);
     }
   };
 
@@ -174,6 +187,7 @@ export default function DrinkInProgress({
                 key={ `${index}-ingredient-step` }
               >
                 <input
+                  data-testid={ `input-drinks-${index}` }
                   id={ ingredient }
                   type="checkbox"
                   checked={ verifyStorage(ingredient) }
@@ -192,6 +206,7 @@ export default function DrinkInProgress({
             <button
               type="button"
               data-testid="finish-recipe-btn"
+              onClick={ () => history.push('/done-recipes') }
             >
               Finalizar Receita
             </button>
