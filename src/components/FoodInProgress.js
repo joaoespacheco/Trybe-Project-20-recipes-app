@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { objectOf, string, func, bool } from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -11,6 +11,11 @@ export default function FoodInProgress({
   statusMessage,
 }) {
   const [buttonFavorite, setButtonFavorite] = useState(false);
+  const [saveStorage, setSaveStorage] = useState({
+    cocktails: {},
+    meals: {},
+  });
+
   const { ingredients, mensures } = recipe;
 
   const handleFavorite = () => {
@@ -44,6 +49,79 @@ export default function FoodInProgress({
     return (favoriteStorage
       .some(({ id }) => pageId === id) ? blackHeartIcon : whiteHeartIcon);
   };
+
+  const verifyStorage = (currentIngredient) => {
+    const storage = localStorage.getItem('inProgressRecipes');
+    const inProgressStorage = storage ? JSON.parse(storage) : {
+      cocktails: {},
+      meals: {},
+    };
+    const { meals } = inProgressStorage;
+
+    if (saveStorage.meals[pageId]) {
+      const status = saveStorage.meals[pageId].some(
+        (ingredient) => ingredient === currentIngredient,
+      );
+      return status;
+    }
+    if (meals[pageId]) {
+      const status = meals[pageId].some(
+        (ingredient) => ingredient === currentIngredient,
+      );
+      return status;
+    }
+    return false;
+  };
+
+  const handleIngredient = (currentIngredient) => {
+    const storage = localStorage.getItem('inProgressRecipes');
+    const inProgressStorage = storage ? JSON.parse(storage) : {
+      cocktails: {},
+      meals: {},
+    };
+    const { cocktails, meals } = inProgressStorage;
+
+    if (meals[pageId]) {
+      const ingredientStatus = meals[pageId].some(
+        (ingredient) => ingredient === currentIngredient,
+      );
+      if (ingredientStatus) {
+        const newIngredients = meals[pageId].filter(
+          (ingredient) => ingredient !== currentIngredient,
+        );
+        const newStorage = {
+          cocktails: { ...cocktails },
+          meals: {
+            ...meals,
+            [pageId]: newIngredients,
+          },
+        };
+        localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
+        setSaveStorage(newStorage);
+      }
+      if (!ingredientStatus) {
+        const newIngredients = [...meals[pageId], currentIngredient];
+        const newStorage = {
+          cocktails: { ...cocktails },
+          meals: {
+            ...meals,
+            [pageId]: newIngredients,
+          },
+        };
+        localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
+        setSaveStorage(newStorage);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const storage = localStorage.getItem('inProgressRecipes');
+    const inProgressStorage = storage ? JSON.parse(storage) : {
+      cocktails: {},
+      meals: {},
+    };
+    setSaveStorage(inProgressStorage);
+  }, []);
 
   return (
     <section>
@@ -90,16 +168,25 @@ export default function FoodInProgress({
 
             <p data-testid="recipe-category">{ recipe.strCategory }</p>
 
-            <ul>
-              {ingredients.map((ingredient, index) => (
-                <li
-                  data-testid="ingredient-step"
-                  key={ `${index}-ingredient-step` }
-                >
-                  { `${ingredient} - ${mensures[index]}` }
-                </li>
-              ))}
-            </ul>
+            {ingredients.map((ingredient, index) => (
+              <label
+                data-testid="ingredient-step"
+                htmlFor={ ingredient }
+                key={ `${index}-ingredient-step` }
+              >
+                <input
+                  id={ ingredient }
+                  type="checkbox"
+                  checked={ verifyStorage(ingredient) }
+                  onChange={ () => handleIngredient(ingredient) }
+                />
+                { `${ingredient} - ${mensures[index] ? (
+                  mensures[index]
+                ) : (
+                  'Unmeasured'
+                )}` }
+              </label>
+            ))}
 
             <p data-testid="instructions">{ recipe.strInstructions }</p>
 

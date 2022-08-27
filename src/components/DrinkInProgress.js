@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { objectOf, string, func, bool } from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -11,7 +11,10 @@ export default function DrinkInProgress({
   statusMessage,
 }) {
   const [buttonFavorite, setButtonFavorite] = useState(false);
-  // const [saveStorage, setSaveStorage] = useState({});
+  const [saveStorage, setSaveStorage] = useState({
+    cocktails: {},
+    meals: {},
+  });
   const { ingredients, mensures } = recipe;
 
   const handleFavorite = () => {
@@ -46,12 +49,78 @@ export default function DrinkInProgress({
       .some(({ id }) => pageId === id) ? blackHeartIcon : whiteHeartIcon);
   };
 
-  // const verifyStorage = () => {
-  //   const storage = localStorage.getItem('inProgressRecipes');
-  //   if (saveStorage.idMeal || saveStorage.idDrink) {
-  //     console.log('');
-  //   }
-  // };
+  const verifyStorage = (currentIngredient) => {
+    const storage = localStorage.getItem('inProgressRecipes');
+    const inProgressStorage = storage ? JSON.parse(storage) : {
+      cocktails: {},
+      meals: {},
+    };
+    const { cocktails } = inProgressStorage;
+
+    if (saveStorage.cocktails[pageId]) {
+      const status = saveStorage.cocktails[pageId].some(
+        (ingredient) => ingredient === currentIngredient,
+      );
+      return status;
+    }
+    if (cocktails[pageId]) {
+      const status = cocktails[pageId].some(
+        (ingredient) => ingredient === currentIngredient,
+      );
+      return status;
+    }
+    return false;
+  };
+
+  const handleIngredient = (currentIngredient) => {
+    const storage = localStorage.getItem('inProgressRecipes');
+    const inProgressStorage = storage ? JSON.parse(storage) : {
+      cocktails: {},
+      meals: {},
+    };
+    const { cocktails, meals } = inProgressStorage;
+
+    if (cocktails[pageId]) {
+      const ingredientStatus = cocktails[pageId].some(
+        (ingredient) => ingredient === currentIngredient,
+      );
+      if (ingredientStatus) {
+        const newIngredients = cocktails[pageId].filter(
+          (ingredient) => ingredient !== currentIngredient,
+        );
+        const newStorage = {
+          meals: { ...meals },
+          cocktails: {
+            ...cocktails,
+            [pageId]: newIngredients,
+          },
+        };
+        localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
+        setSaveStorage(newStorage);
+      }
+      if (!ingredientStatus) {
+        const newIngredients = [...cocktails[pageId], currentIngredient];
+        const newStorage = {
+          meals: { ...meals },
+          cocktails: {
+            ...cocktails,
+            [pageId]: newIngredients,
+          },
+        };
+        localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
+        setSaveStorage(newStorage);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const storage = localStorage.getItem('inProgressRecipes');
+    const inProgressStorage = storage ? JSON.parse(storage) : {
+      cocktails: {},
+      meals: {},
+    };
+    setSaveStorage(inProgressStorage);
+  }, []);
 
   return (
     <section>
@@ -98,23 +167,25 @@ export default function DrinkInProgress({
 
             <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
 
-            <div>
-              {ingredients.map((ingredient, index) => (
-                <label
-                  htmlFor={ ingredient }
-                  data-testid="ingredient-step"
-                  key={ `${index}-ingredient-step` }
-                >
-                  <input
-                    data-testid={ `${index}-ingredient-step` }
-                    id={ ingredient }
-                    type="checkbox"
-                    // checked={  }
-                  />
-                  { `${ingredient} - ${mensures[index]}` }
-                </label>
-              ))}
-            </div>
+            {ingredients.map((ingredient, index) => (
+              <label
+                data-testid="ingredient-step"
+                htmlFor={ ingredient }
+                key={ `${index}-ingredient-step` }
+              >
+                <input
+                  id={ ingredient }
+                  type="checkbox"
+                  checked={ verifyStorage(ingredient) }
+                  onChange={ () => handleIngredient(ingredient) }
+                />
+                { `${ingredient} - ${mensures[index] ? (
+                  mensures[index]
+                ) : (
+                  'Unmeasured'
+                )}` }
+              </label>
+            ))}
 
             <p data-testid="instructions">{ recipe.strInstructions }</p>
 
