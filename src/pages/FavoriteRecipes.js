@@ -61,56 +61,62 @@ export default function FavoriteRecipes() {
       {FavoriteFoods && (
         <section>
           {
-            FavoriteFoods.map(
-              ({ id, image, name, type, category, alcoholicOrNot }, index) => (
-                <div key={ `${id}-${index}` }>
+            FavoriteFoods.map(({
+              id,
+              image,
+              name,
+              type,
+              category,
+              alcoholicOrNot,
+              nationality,
+            }, index) => (
+              <div key={ `${id}-${index}` }>
+                <img
+                  data-testid={ `${index}-horizontal-image` }
+                  src={ image }
+                  alt={ `${name}` }
+                  style={ { width: '250px' } }
+                />
+                <h3
+                  data-testid={ `${index}-horizontal-name` }
+                >
+                  {name}
+                </h3>
+                <p
+                  data-testid={ `${index}-horizontal-top-text` }
+                >
+                  {type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot}
+                </p>
+                <button
+                  type="button"
+                  onClick={ () => handleClickShare(type, id) }
+                  style={ { background: 'none', border: 'none', cursor: 'pointer' } }
+                >
                   <img
-                    data-testid={ `${index}-horizontal-image` }
-                    src={ image }
-                    alt={ `${name}` }
-                    style={ { width: '250px' } }
-                  />
-                  <h3
-                    data-testid={ `${index}-horizontal-name` }
-                  >
-                    {name}
-                  </h3>
-                  <p
-                    data-testid={ `${index}-horizontal-top-text` }
-                  >
-                    {type === 'food' ? category : alcoholicOrNot}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={ () => handleClickShare(type, id) }
-                    style={ { background: 'none', border: 'none', cursor: 'pointer' } }
                     data-testid={ `${index}-horizontal-share-btn` }
-                  >
-                    <img
-                      src={ shareIcon }
-                      alt="Ícone de compartilhamento"
-                    />
-                  </button>
-                  {elementCopied === id
+                    src={ shareIcon }
+                    alt="Ícone de compartilhamento"
+                  />
+                </button>
+                {elementCopied === id
                   && (
                     <span>
                       Link copied!
                     </span>
                   )}
-                  <button
-                    type="button"
-                    onClick={ () => handleFavorite(id) }
-                    style={ { background: 'none', border: 'none', cursor: 'pointer' } }
-                  >
-                    <img
-                      src={ blackHeartIcon }
-                      alt="Ícone de favoritar"
-                      data-testid={ `${index}-horizontal-favorite-btn` }
-                    />
-                  </button>
-                </div>
-              ),
-            )
+                <button
+                  type="button"
+                  onClick={ () => handleFavorite(id) }
+                  style={ { background: 'none', border: 'none', cursor: 'pointer' } }
+                >
+                  <img
+                    src={ blackHeartIcon }
+                    alt="Ícone de favoritar"
+                    data-testid={ `${index}-horizontal-favorite-btn` }
+                  />
+                </button>
+              </div>
+            ))
           }
         </section>
       )}
