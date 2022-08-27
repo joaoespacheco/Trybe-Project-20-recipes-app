@@ -11,7 +11,7 @@ export default function CardDrink() {
       {recipes.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
         <Link
           to={ `/drinks/${idDrink}` }
-          key={ idDrink }
+          key={ `${index} - ${idDrink}` }
         >
           <div data-testid={ `${index}-recipe-card` }>
             <img

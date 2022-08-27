@@ -62,6 +62,7 @@ export default function RecipeDetails() {
         : await getCockTailApi('recipe', path[2]);
       const getResponse = path[1] === 'foods' ? recipeResponse.meals
         : recipeResponse.drinks;
+      console.log(getResponse[0]);
       setRecipe(changeRecipe(getResponse[0]));
     };
     getApiRecipe();
