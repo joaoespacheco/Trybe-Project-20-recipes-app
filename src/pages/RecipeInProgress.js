@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import DrinkInProgress from '../components/DrinkInProgress';
-import FoodInProgress from '../components/FoodInProgress';
+import MealInProgress from '../components/MealInProgress';
 import getMealApi from '../services/MealApi';
 import getCockTailApi from '../services/CockTailApi';
 
@@ -43,7 +43,8 @@ export default function RecipeInProgress() {
 
   const handleClickShare = () => {
     setStatusMessage(true);
-    copy(`http://localhost:3000${pathname}`);
+    const endPoint = pathname.replace('/in-progress', '');
+    copy(`http://localhost:3000${endPoint}`);
   };
 
   useEffect(() => {
@@ -61,7 +62,7 @@ export default function RecipeInProgress() {
     <section>
       {
         recipe.idMeal && (
-          <FoodInProgress
+          <MealInProgress
             recipe={ recipe }
             pageId={ path[2] }
             statusMessage={ statusMessage }

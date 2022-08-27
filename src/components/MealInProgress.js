@@ -5,7 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-export default function FoodInProgress({
+export default function MealInProgress({
   recipe,
   pageId,
   handleClickShare,
@@ -230,7 +230,7 @@ export default function FoodInProgress({
   );
 }
 
-FoodInProgress.propTypes = {
+MealInProgress.propTypes = {
   recipe: objectOf(string),
   pageId: string,
   handleClickShare: func,
