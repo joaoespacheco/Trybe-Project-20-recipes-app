@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import FilterButtons from '../components/FilterButtons';
 import shareIcon from '../images/shareIcon.svg';
 
 export default function DoneRecipes() {
   const [list, setList] = useState([]);
+  const [share, setShare] = useState('');
+
   useEffect(() => {
     const storage = localStorage.getItem('doneRecipes');
     const data = storage ? JSON.parse(storage) : [];
     setList(data);
   }, []);
+
+  const handleClick = ({ type, id, name }) => {
+    copy(`http://localhost:3000/${type}s/${id}`);
+    setShare(name);
+  };
 
   return (
     <>
@@ -35,6 +43,7 @@ export default function DoneRecipes() {
             <p data-testid={ `${index}-horizontal-done-date` }>{ item.doneDate }</p>
             <button
               type="button"
+              onClick={ () => handleClick(item) }
             >
               <img
                 src={ shareIcon }
@@ -42,6 +51,7 @@ export default function DoneRecipes() {
                 data-testid={ `${index}-horizontal-share-btn` }
               />
             </button>
+            { share === item.name && <span>Link copied!</span> }
             { item.tags.map((tag, i2) => (
               <p
                 key={ i2 }
