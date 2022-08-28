@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import FilterButtons from '../components/FilterButtons';
@@ -33,20 +34,22 @@ export default function DoneRecipes() {
         <FilterButtons filterRecipes={ filterRecipes } />
         { list[0] && list.map((item, index) => (
           <div key={ index }>
-            <img
-              data-testid={ `${index}-horizontal-image` }
-              src={ item.image }
-              alt={ item.name }
-              style={ { width: '150px', padding: '0 10px' } }
-            />
-            <p
-              data-testid={ `${index}-horizontal-top-text` }
-            >
-              { item.type === 'food'
-                ? `${item.nationality} - ${item.category}`
-                : `${item.alcoholicOrNot}` }
-            </p>
-            <p data-testid={ `${index}-horizontal-name` }>{ item.name }</p>
+            <Link to={ `/${item.type}s/${item.id}` }>
+              <img
+                data-testid={ `${index}-horizontal-image` }
+                src={ item.image }
+                alt={ item.name }
+                style={ { width: '150px', padding: '0 10px' } }
+              />
+              <p
+                data-testid={ `${index}-horizontal-top-text` }
+              >
+                { item.type === 'food'
+                  ? `${item.nationality} - ${item.category}`
+                  : `${item.alcoholicOrNot}` }
+              </p>
+              <p data-testid={ `${index}-horizontal-name` }>{ item.name }</p>
+            </Link>
             <p data-testid={ `${index}-horizontal-done-date` }>{ item.doneDate }</p>
             <button
               type="button"
