@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
@@ -75,17 +76,21 @@ export default function FavoriteRecipes() {
                 <div
                   key={ `${id}-${index}` }
                 >
-                  <img
-                    data-testid={ `${index}-horizontal-image` }
-                    src={ image }
-                    alt={ `${name}` }
-                    style={ { width: '250px' } }
-                  />
-                  <h3
-                    data-testid={ `${index}-horizontal-name` }
-                  >
-                    {name}
-                  </h3>
+                  <Link to={ `/${type}s/${id}` }>
+                    <img
+                      data-testid={ `${index}-horizontal-image` }
+                      src={ image }
+                      alt={ `${name}` }
+                      style={ { width: '250px' } }
+                    />
+                  </Link>
+                  <Link to={ `/${type}s/${id}` }>
+                    <h3
+                      data-testid={ `${index}-horizontal-name` }
+                    >
+                      {name}
+                    </h3>
+                  </Link>
                   <p
                     data-testid={ `${index}-horizontal-top-text` }
                   >
