@@ -76,7 +76,7 @@ describe('Verificando a page RecipeDetails', () => {
     expect(firstElementFavoriteBtn).toBeInTheDocument();
   })
 
-  it('Verifica as funcionalidades dos elementos em "/favorite-recipes"', async () => {
+  it('Verifica as funcionalidades dos botões de profile, compartilhar e favoritar em "/favorite-recipes"', async () => {
     localStorage.clear()
     localStorage.setItem('favoriteRecipes', JSON.stringify(MockStorage));
 
@@ -95,6 +95,41 @@ describe('Verificando a page RecipeDetails', () => {
     userEvent.click(profileIcon);
     expect(history.location.pathname).toBe('/profile');
 
+  })
+
+  it('Verifica as funcionalidades dos botões filtrar e de redirecionamento em "/favorite-recipes"', async () => {
+    localStorage.clear()
+    localStorage.setItem('favoriteRecipes', JSON.stringify(MockStorage));
+
+    const { history } = renderWithRouter(<FavoriteRecipes />);
+
+    const filterAll = screen.getByTestId('filter-by-all-btn');
+    const filterFood = screen.getByTestId('filter-by-food-btn');
+    const filterDrink = screen.getByTestId('filter-by-drink-btn');
+    const firstElementImage = screen.getByTestId('0-horizontal-image');
+    const secondElementImage = screen.getByTestId('1-horizontal-image');
+
+    userEvent.click(filterFood);
+    expect(firstElementImage).toBeInTheDocument();
+    expect(secondElementImage).not.toBeInTheDocument();
+
+    userEvent.click(filterAll);
+
+    const NewsecondElementImage = screen.getByTestId('1-horizontal-image');
+
+    expect(firstElementImage).toBeInTheDocument();
+    expect(NewsecondElementImage).toBeInTheDocument();
+
+    userEvent.click(filterDrink);
+
+    const NewfirstElementImage = screen.getByTestId('0-horizontal-image');
+
+    expect(NewfirstElementImage).toBeInTheDocument();
+    expect(NewsecondElementImage).not.toBeInTheDocument();
+
+    userEvent.click(NewfirstElementImage);
+
+    expect(history.location.pathname).toBe('/drinks/178319');
   })
 
 })
