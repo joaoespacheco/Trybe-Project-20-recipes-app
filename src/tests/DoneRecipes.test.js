@@ -20,7 +20,7 @@ describe('Testando componente Done Recipes', () => {
         expect(drinkName).toHaveTextContent("Margarita");
     });
 
-    it('Verificando se os elementos são renderizados', async () => {
+    it('Verificando se o botão de compartilhar tem o comportamento esperado', async () => {
         localStorage.setItem('doneRecipes', JSON.stringify(mockLocalStorageDoneRecipe));
         const { history} = renderWithRouter(<App />);
         history.push("/done-recipes");
@@ -37,7 +37,7 @@ describe('Testando componente Done Recipes', () => {
         expect(copyText).toBeInTheDocument();
     });
 
-    it('Verificando se os elementos são renderizados', async () => {
+    it('Verificando se os filtros tem o comportamento esperado', async () => {
         localStorage.setItem('doneRecipes', JSON.stringify(mockLocalStorageDoneRecipe));
         const { history} = renderWithRouter(<App />);
         history.push("/done-recipes");
@@ -50,11 +50,22 @@ describe('Testando componente Done Recipes', () => {
         userEvent.click(buttonDrinkFilter);
 
         const drinkName = screen.getByTestId('0-horizontal-name');
-
         expect(drinkName).toHaveTextContent('Margarita');
+
+        const buttonAllFilter = screen.getByTestId('filter-by-all-btn');
+        userEvent.click(buttonAllFilter);
+
+        const newFoodName = screen.getByTestId('0-horizontal-name');
+        expect(drinkName).toHaveTextContent('Spicy Arrabiata Penne');
+
+        const buttonFoodFilter = screen.getByTestId('filter-by-food-btn');
+        userEvent.click(buttonFoodFilter);
+        
+        const newDrinkName = screen.queryByText(/Margarita/i);
+        expect(newDrinkName).toBeNull();
     });
 
-    it('Verificando se os elementos são renderizados', async () => {
+    it('Verificando se o site não quebra com a falta de algo no localStorage', async () => {
         localStorage.removeItem('doneRecipes');
 
         const { history} = renderWithRouter(<App />);

@@ -209,5 +209,43 @@ describe('Verificando a page RecipeDetails', () => {
   
   });
 
+  it('Verificando os botões de favorito para remover dos favoritos no "/drinks', async () => {
+    localStorage.removeItem('favoriteRecipes');
+    localStorage.setItem('favoriteRecipes', JSON.stringify([{
+      id: '17219',
+      type: 'drink',
+      nationality: '',
+      category: 'Cocktail',
+      alcoholicOrNot: 'Alcoholic',
+      name: 'Yellow Bird',
+      image: 'https://www.thecocktaildb.com/images/media/drink/2t9r6w1504374811.jpg',
+    }]))
+
+    const { history } = renderWithRouter(<App/>);
+    history.push('/drinks/17219');
+
+    jest.spyOn(global, 'fetch')
+    global.fetch
+    .mockReturnValue({
+      json: jest.fn().mockResolvedValue(mockFoodName),
+    })
+    .mockReturnValueOnce({
+      json: jest.fn().mockResolvedValue(mockDrinkFirstLetter),
+    });
+  
+    await waitFor (() => {
+      expect(fetch).toHaveBeenCalledWith('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=17219');
+    });
+    
+    const buttonFavorite = screen.getByTestId('favorite-btn');
+    
+    expect(buttonFavorite).toBeInTheDocument();
+    
+    userEvent.click(buttonFavorite);
+
+    const newButtonFavorite = screen.getByTestId('favorite-btn');
+    expect(newButtonFavorite).toHaveAttribute('src', 'whiteHeartIcon.svg');
+  });
+
 });
 

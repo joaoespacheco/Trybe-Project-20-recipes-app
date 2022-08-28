@@ -15,10 +15,8 @@ const filterEndpoint = (type, endpoint) => {
     return (FILTER_ENDPOINT + endpoint);
   case 'ingredient':
     return (INGREDIENT_ENDPOINT + endpoint);
-  case 'recipe':
-    return (RECIPE_ENDPOINT + endpoint);
   default:
-    return ('');
+    return (RECIPE_ENDPOINT + endpoint);
   }
 };
 const getMealApi = async (type, endpoint) => {
