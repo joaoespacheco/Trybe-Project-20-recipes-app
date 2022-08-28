@@ -5,12 +5,14 @@ import FilterButtons from '../components/FilterButtons';
 import shareIcon from '../images/shareIcon.svg';
 
 export default function DoneRecipes() {
+  const [recipes, setRecipes] = useState([]);
   const [list, setList] = useState([]);
   const [share, setShare] = useState('');
 
   useEffect(() => {
     const storage = localStorage.getItem('doneRecipes');
     const data = storage ? JSON.parse(storage) : [];
+    setRecipes(data);
     setList(data);
   }, []);
 
@@ -19,11 +21,16 @@ export default function DoneRecipes() {
     setShare(name);
   };
 
+  const filterRecipes = (param) => {
+    const result = recipes.filter(({ type }) => type.includes(param));
+    setList(result);
+  };
+
   return (
     <>
       <Header statusButton={ false } pageTitle="Done Recipes" />
       <section>
-        <FilterButtons />
+        <FilterButtons filterRecipes={ filterRecipes } />
         { list[0] && list.map((item, index) => (
           <div key={ index }>
             <img
