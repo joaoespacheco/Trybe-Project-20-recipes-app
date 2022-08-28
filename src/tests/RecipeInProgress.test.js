@@ -8,7 +8,7 @@ import MockRecipeDrink from './mocks/MockRecipeDrink';
 
 jest.mock('clipboard-copy');
 
-describe('Verificando a page RecipeDetails', () => {
+describe('Verificando a page RecipeInProgress', () => {
   
   it('Verifica se os componentes são renderizados em "drinks/:id/in-progress"', async () => {
     fetch = jest.fn(() => ({

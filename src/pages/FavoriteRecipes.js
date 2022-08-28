@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
-import drinkIcon from '../images/drinkIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function FavoriteRecipes() {
@@ -16,8 +14,7 @@ export default function FavoriteRecipes() {
   };
 
   const handleFavorite = (currentId) => {
-    const storage = localStorage.getItem('favoriteRecipes');
-    const favoriteStorage = storage ? JSON.parse(storage) : [];
+    const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const newFavorites = favoriteStorage.filter(({ id }) => id !== currentId);
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
     setFavoriteFoods(newFavorites);
@@ -58,7 +55,7 @@ export default function FavoriteRecipes() {
           Drinks
         </button>
       </div>
-      {FavoriteFoods && (
+      { !!FavoriteFoods.length && (
         <section>
           {
             FavoriteFoods.map(({
@@ -120,31 +117,6 @@ export default function FavoriteRecipes() {
           }
         </section>
       )}
-      <footer
-        style={ { position: 'fixed', bottom: '0px', display: 'flex' } }
-        data-testid="footer"
-      >
-        <button
-          type="button"
-          style={ { background: 'none', border: 'none', cursor: 'pointer' } }
-        >
-          <img
-            src={ mealIcon }
-            alt="Ícone de food"
-            data-testid="food-bottom-btn"
-          />
-        </button>
-        <button
-          type="button"
-          style={ { background: 'none', border: 'none', cursor: 'pointer' } }
-        >
-          <img
-            src={ drinkIcon }
-            alt="Ícone de drink"
-            data-testid="drinks-bottom-btn"
-          />
-        </button>
-      </footer>
     </>
   );
 }
