@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { string } from 'prop-types';
 import RecipeContext from '../context/RecipeContext';
+import styles from '../styles/Categories.module.css';
 
 export default function Categories({ page }) {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -26,7 +27,14 @@ export default function Categories({ page }) {
   };
 
   return (
-    <div>
+    <div className={ styles.containerCategories }>
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ () => setFilter('name', '') }
+      >
+        All
+      </button>
       { availableCategories.map(({ strCategory }, index) => (
         <button
           type="button"
@@ -38,13 +46,6 @@ export default function Categories({ page }) {
           { strCategory }
         </button>
       )) }
-      <button
-        type="button"
-        data-testid="All-category-filter"
-        onClick={ () => setFilter('name', '') }
-      >
-        All
-      </button>
     </div>
   );
 }

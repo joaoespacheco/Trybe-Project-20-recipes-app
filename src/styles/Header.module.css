@@ -1,11 +1,29 @@
-header {
+.containerHeader {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
-header h1 {
+.containerHeader h1 {
   font-family: 'Oleo Script Swash Caps', 'cursive';
   font-size: 2rem;
   font-weight: bolder;
   color: #222222;
+}
+
+.containerHeader a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerHeader button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerHeader svg {
+  color: #222222;
+  font-size: 2rem;
 }

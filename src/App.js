@@ -8,10 +8,11 @@ import RecipeInProgress from './pages/RecipeInProgress';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import styles from './styles/App.module.css';
 
 function App() {
   return (
-    <section>
+    <section className={ styles.appContainer }>
       <Switch>
         <Route path="/favorite-recipes" component={ FavoriteRecipes } />
         <Route path="/done-recipes" component={ DoneRecipes } />

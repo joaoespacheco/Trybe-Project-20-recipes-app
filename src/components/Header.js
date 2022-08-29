@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { bool, string } from 'prop-types';
 import { Link } from 'react-router-dom';
-import profile from '../images/profileIcon.svg';
+import { FaUser } from 'react-icons/fa';
 import search from '../images/searchIcon.svg';
 import RecipeContext from '../context/RecipeContext';
 import styles from '../styles/Header.module.css';
@@ -9,13 +9,9 @@ import styles from '../styles/Header.module.css';
 export default function Header({ statusButton, pageTitle }) {
   const { statusSearchBar, setStatusSearchBar } = useContext(RecipeContext);
   return (
-    <header>
+    <header className={ styles.containerHeader }>
       <Link to="/profile">
-        <img
-          src={ profile }
-          alt="Ícone de perfil"
-          data-testid="profile-top-btn"
-        />
+        <FaUser />
       </Link>
       <h1 data-testid="page-title">{ pageTitle }</h1>
       { statusButton && (
