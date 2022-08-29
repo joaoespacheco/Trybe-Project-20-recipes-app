@@ -1,0 +1,11 @@
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-family: 'Oleo Script Swash Caps', 'cursive';
+  font-size: 2rem;
+  font-weight: bolder;
+  color: #222222;
+}

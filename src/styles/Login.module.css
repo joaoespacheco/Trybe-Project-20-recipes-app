@@ -1,0 +1,76 @@
+
+@media screen and (max-width: 360px) {
+  .login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    row-gap: 0.75rem;
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%); 
+  }
+  
+  .loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 1rem #F18805;
+    border-radius: 1rem;
+  }
+  
+  .loginContainer h1 {
+    font-family: 'Oleo Script Swash Caps', 'cursive';
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color: #222222;
+  }
+
+  .loginContainer label {
+    width: 100%;
+  }
+
+  .loginContainer label input {
+    width: 100%;
+    height: 2rem;
+    padding: 1rem;
+    border: 1px solid #222222;
+    border-radius: 0.5rem;
+  }
+
+  .loginContainer label p {
+    padding-left: 0.25rem;
+    color: #222222;
+    font-size: 1rem;
+  }
+  
+  .loginContainer button {
+    width: 100%;
+    font-size: 1rem;
+    background-color: #f1870590;
+    color: #ffffffc0;
+    height: 2rem;
+    border: 1px solid #f1870590;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+
+  .loginContainer button:not(:disabled) {
+    background-color: #F18805;
+    border: 1px solid #F18805;
+    box-shadow: 0 0 0.40rem #F18805;
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  .loginContainer svg {
+    font-size: 5rem;
+    color: #222222;
+  }  
+
+
+}
+
+

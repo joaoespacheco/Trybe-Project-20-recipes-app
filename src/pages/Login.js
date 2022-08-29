@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { SiCodechef } from 'react-icons/si';
+import styles from '../styles/Login.module.css';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -23,40 +25,46 @@ export default function Login() {
   };
 
   return (
-    <main>
-      <label htmlFor="email">
-        <input
-          data-testid="email-input"
-          id="email"
-          type="email"
-          placeholder="Digite seu email"
-          value={ email }
-          onChange={ ({ target }) => {
-            setEmail(target.value);
-          } }
-        />
+    <main className={ styles.login }>
+      <section className={ styles.loginContainer }>
+        <SiCodechef />
+        <h1>APP de Receitas</h1>
+        <label htmlFor="email">
+          <p>Email</p>
+          <input
+            data-testid="email-input"
+            id="email"
+            type="email"
+            placeholder="Digite seu email"
+            value={ email }
+            onChange={ ({ target }) => {
+              setEmail(target.value);
+            } }
+          />
 
-      </label>
-      <label htmlFor="password">
-        <input
-          data-testid="password-input"
-          id="password"
-          type="password"
-          placeholder="Digite seu password"
-          value={ password }
-          onChange={ ({ target }) => {
-            setPassword(target.value);
-          } }
-        />
-      </label>
-      <button
-        type="button"
-        data-testid="login-submit-btn"
-        disabled={ statusButton() }
-        onClick={ handleClick }
-      >
-        Enter
-      </button>
+        </label>
+        <label htmlFor="password">
+          <p>Senha</p>
+          <input
+            data-testid="password-input"
+            id="password"
+            type="password"
+            placeholder="Digite sua senha"
+            value={ password }
+            onChange={ ({ target }) => {
+              setPassword(target.value);
+            } }
+          />
+        </label>
+        <button
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ statusButton() }
+          onClick={ handleClick }
+        >
+          Login
+        </button>
+      </section>
     </main>
   );
 }

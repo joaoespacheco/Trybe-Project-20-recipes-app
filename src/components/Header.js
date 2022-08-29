@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import profile from '../images/profileIcon.svg';
 import search from '../images/searchIcon.svg';
 import RecipeContext from '../context/RecipeContext';
+import styles from '../styles/Header.module.css';
 
 export default function Header({ statusButton, pageTitle }) {
   const { statusSearchBar, setStatusSearchBar } = useContext(RecipeContext);
