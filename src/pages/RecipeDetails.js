@@ -5,6 +5,7 @@ import MealRecipe from '../components/MealRecipe';
 import DrinkRecipe from '../components/DrinkRecipe';
 import getMealApi from '../services/MealApi';
 import getCockTailApi from '../services/CockTailApi';
+import styles from '../styles/RecipeDetail.module.css';
 
 export default function RecipeDetails() {
   const [recipe, setRecipe] = useState([]);
@@ -110,7 +111,9 @@ export default function RecipeDetails() {
   };
 
   return (
-    <section>
+    <section
+      className={ styles.containerRecipeDetail }
+    >
       { recipe.idMeal
       && <MealRecipe
         recipe={ recipe }
@@ -131,8 +134,8 @@ export default function RecipeDetails() {
           <button
             type="button"
             data-testid="start-recipe-btn"
-            style={ { position: 'fixed', bottom: '0' } }
             onClick={ () => handleLocalStorage() }
+            className={ styles.buttonStart }
           >
             {statusInProgress ? 'Continue Recipe' : 'Start Recipe'}
           </button>

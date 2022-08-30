@@ -1,4 +1,27 @@
 .gallery {
+  column-gap: 0.3rem;
   display: flex;
   overflow-x: scroll;
+  padding: 0.5rem , 0.5rem , 0.5rem , 0;
+}
+
+.galleryCell {
+  background-color: #222;
+  border-radius: 5px;
+  box-shadow: 0 0 0.2rem #f18805;
+  padding: 0.5rem;
+}
+
+.galleryCell img {
+  border-radius: 5px;
+  height: 9rem;
+}
+
+.galleryCell p {
+  color: white;
+  text-align: center;
+}
+
+.galleryCell p:nth-child( 2 ) {
+  font-size: 1.2rem;
 }

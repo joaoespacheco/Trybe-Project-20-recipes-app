@@ -1,27 +1,27 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import RecipeContext from '../context/RecipeContext';
+import styles from '../styles/Cards.module.css';
 
 export default function CardDrink() {
   const { recipesList } = useContext(RecipeContext);
   const maxCardNumbers = 12;
   const recipes = recipesList.filter((_recipe, index) => index < maxCardNumbers);
   return (
-    <div style={ { display: 'flex', flexDirection: 'row', flexWrap: 'wrap' } }>
+    <div
+      className={ styles.containerCards }
+    >
       {recipes.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
         <Link
           to={ `/drinks/${idDrink}` }
           key={ `${index} - ${idDrink}` }
         >
-          <div data-testid={ `${index}-recipe-card` }>
-            <img
-              src={ strDrinkThumb }
-              style={ { width: '150px', padding: '0 10px' } }
-              alt={ strDrink }
-              data-testid={ `${index}-card-img` }
-            />
-            <h3 data-testid={ `${index}-card-name` }>{ strDrink }</h3>
-          </div>
+          <h3 data-testid={ `${index}-card-name` }>{ strDrink }</h3>
+          <img
+            src={ strDrinkThumb }
+            alt={ strDrink }
+            data-testid={ `${index}-card-img` }
+          />
         </Link>
       ))}
     </div>

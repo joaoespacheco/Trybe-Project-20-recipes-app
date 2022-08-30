@@ -5,6 +5,7 @@ import DrinkInProgress from '../components/DrinkInProgress';
 import MealInProgress from '../components/MealInProgress';
 import getMealApi from '../services/MealApi';
 import getCockTailApi from '../services/CockTailApi';
+import styles from '../styles/RecipeInProgress.module.css';
 
 export default function RecipeInProgress() {
   const [recipe, setRecipe] = useState([]);
@@ -99,7 +100,9 @@ export default function RecipeInProgress() {
   }, []);
 
   return (
-    <section>
+    <section
+      className={ styles.containerRecipeInProgress }
+    >
       {
         recipe.idMeal && (
           <MealInProgress

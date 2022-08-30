@@ -32,23 +32,25 @@ export default function RecomendationCards({ page }) {
           >
             <img
               src={ strDrinkThumb }
-              style={ { width: '180px', padding: '0 10px' } }
               alt={ strDrink }
             />
-            <h3>{ strAlcoholic }</h3>
-            <h3 data-testid={ `${index}-recomendation-title` }>{ strDrink }</h3>
+            <p data-testid={ `${index}-recomendation-title` }>{ strDrink }</p>
+            <p>{ strAlcoholic }</p>
           </div>
         ))
       ) : (
         recomendation.map(({ strMealThumb, strMeal, idMeal, strCategory }, index) => (
-          <div data-testid={ `${index}-recomendation-card` } key={ idMeal }>
+          <div
+            data-testid={ `${index}-recomendation-card` }
+            key={ idMeal }
+            className={ styles.galleryCell }
+          >
             <img
               src={ strMealThumb }
-              style={ { width: '175px', padding: '0 10px' } }
               alt={ strMeal }
             />
-            <h3>{ strCategory }</h3>
-            <h3 data-testid={ `${index}-recomendation-title` }>{ strMeal }</h3>
+            <p data-testid={ `${index}-recomendation-title` }>{ strMeal }</p>
+            <p>{ strCategory }</p>
           </div>
         ))
       )}

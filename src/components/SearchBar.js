@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { string } from 'prop-types';
 import RecipeContext from '../context/RecipeContext';
+import styles from '../styles/SearchBar.module.css';
 
 export default function SearchBar({ page }) {
   const [search, setSearch] = useState('');
@@ -18,58 +19,60 @@ export default function SearchBar({ page }) {
   };
 
   return (
-    <section>
+    <section className={ styles.containerSearchBar }>
       <label
         htmlFor="search-input"
       >
-        Search
         <input
           value={ search }
           onChange={ (e) => setSearch(e.target.value) }
           id="search-input"
           data-testid="search-input"
           type="text"
+          placeholder="Digite o filtro"
         />
       </label>
-      <label htmlFor="ingredient-radio">
-        <input
-          id="ingredient-radio"
-          name="filter"
-          type="radio"
-          data-testid="ingredient-search-radio"
-          value="ingredient"
-          onChange={ (e) => setRadio(e.target.value) }
-        />
-        Ingredient
-      </label>
-      <label htmlFor="name-radio">
-        <input
-          id="name-radio"
-          name="filter"
-          type="radio"
-          data-testid="name-search-radio"
-          value="name"
-          onChange={ (e) => setRadio(e.target.value) }
-        />
-        Name
-      </label>
-      <label htmlFor="first-letter-radio">
-        <input
-          id="first-letter-radio"
-          name="filter"
-          type="radio"
-          data-testid="first-letter-search-radio"
-          value="firstLetter"
-          onChange={ (e) => setRadio(e.target.value) }
-        />
-        First Letter
-      </label>
+      <div>
+        <label htmlFor="ingredient-radio">
+          <input
+            id="ingredient-radio"
+            name="filter"
+            type="radio"
+            data-testid="ingredient-search-radio"
+            value="ingredient"
+            onChange={ (e) => setRadio(e.target.value) }
+          />
+          <span>Ingrediente</span>
+        </label>
+        <label htmlFor="name-radio">
+          <input
+            id="name-radio"
+            name="filter"
+            type="radio"
+            data-testid="name-search-radio"
+            value="name"
+            onChange={ (e) => setRadio(e.target.value) }
+          />
+          <span>Nome</span>
+        </label>
+        <label htmlFor="first-letter-radio">
+          <input
+            id="first-letter-radio"
+            name="filter"
+            type="radio"
+            data-testid="first-letter-search-radio"
+            value="firstLetter"
+            onChange={ (e) => setRadio(e.target.value) }
+          />
+          <span>Primeira letra</span>
+        </label>
+      </div>
       <button
         data-testid="exec-search-btn"
         type="button"
         onClick={ handleClick }
       >
-        Search
+        Buscar
       </button>
     </section>
   );

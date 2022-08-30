@@ -4,6 +4,7 @@ import RecomendationCards from './RecomendationCard';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import styles from '../styles/RecipeDetail.module.css';
 
 export default function MealRecipe({ recipe, handleClickShare, statusMessage, pageId }) {
   const [buttonFavorite, setButtonFavorite] = useState(false);
@@ -43,62 +44,79 @@ export default function MealRecipe({ recipe, handleClickShare, statusMessage, pa
   };
 
   return (
-    <section>
+    <section
+      className={ styles.containerRecipeMeal }
+    >
       {
         !!recipe && (
           <>
-            <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
+            <header>
+              <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
+
+              <div>
+                {statusMessage
+              && (
+                <span>
+                  Link copiado!
+                </span>
+              )}
+                <button
+                  type="button"
+                  onClick={ handleClickShare }
+                  style={ { background: 'none', border: 'none', cursor: 'pointer' } }
+                  data-testid="share-btn"
+                >
+                  <img
+                    src={ shareIcon }
+                    alt="Ícone de compartilhamento"
+                    className={ styles.icons }
+                  />
+                </button>
+                <button
+                  type="button"
+                  onClick={ handleFavorite }
+                  style={ { background: 'none', border: 'none', cursor: 'pointer' } }
+                >
+                  <img
+                    src={ verifyFavoriteSave() }
+                    alt="Ícone de favoritar"
+                    data-testid="favorite-btn"
+                    className={ styles.icons }
+                  />
+                </button>
+              </div>
+            </header>
 
             <img
               data-testid="recipe-photo"
               src={ recipe.strMealThumb }
               alt={ recipe.strMeal }
-              style={ { width: '150px', padding: '0 10px' } }
             />
 
-            <button
-              type="button"
-              onClick={ handleClickShare }
-              style={ { background: 'none', border: 'none', cursor: 'pointer' } }
-              data-testid="share-btn"
+            <p data-testid="recipe-category">{ `Categoria: ${recipe.strCategory}` }</p>
+
+            <div
+              className={ styles.ingredientList }
             >
-              <img
-                src={ shareIcon }
-                alt="Ícone de compartilhamento"
-              />
-            </button>
-            {statusMessage
-      && (
-        <span>
-          Link copied!
-        </span>
-      )}
-            <button
-              type="button"
-              onClick={ handleFavorite }
-              style={ { background: 'none', border: 'none', cursor: 'pointer' } }
+              <p>Lista de Ingredientes:</p>
+              <ul>
+                <br />
+                {ingredients.map((ingredient, index) => (
+                  <li
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                    key={ `${index}-ingredient-name-and-measure` }
+                  >
+                    { `${ingredient} - ${mensures[index]}` }
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div
+              className={ styles.instructions }
             >
-              <img
-                src={ verifyFavoriteSave() }
-                alt="Ícone de favoritar"
-                data-testid="favorite-btn"
-              />
-            </button>
-
-            <p data-testid="recipe-category">{ recipe.strCategory }</p>
-
-            <ul>
-              {ingredients.map((ingredient, index) => (
-                <li
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                  key={ `${index}-ingredient-name-and-measure` }
-                >
-                  { `${ingredient} - ${mensures[index]}` }
-                </li>
-              ))}
-            </ul>
-
-            <p data-testid="instructions">{ recipe.strInstructions }</p>
+              <p>Modo de preparo:</p>
+              <p data-testid="instructions">{ recipe.strInstructions }</p>
+            </div>
 
             <iframe
               data-testid="video"

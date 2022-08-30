@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import RecipeContext from '../context/RecipeContext';
 import Categories from '../components/Categories';
+import styles from '../styles/Foods.module.css';
 
 export default function Drinks() {
   const {
@@ -22,7 +23,9 @@ export default function Drinks() {
   }, []);
 
   return (
-    <>
+    <main
+      className={ styles.containerFoods }
+    >
       <Header statusButton pageTitle="Drinks" />
       { statusSearchBar && <SearchBar page="drinks" />}
       <Categories page="drinks" />
@@ -35,6 +38,6 @@ export default function Drinks() {
             && <Redirect to={ (`/drinks/${recipesList[0].idDrink}`) } />)
       }
       <Footer />
-    </>
+    </main>
   );
 }

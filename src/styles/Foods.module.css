@@ -1,13 +1,18 @@
-@media screen and (max-width: 360px) {
-main {
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  row-gap: 0.75rem;
-  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-  height: 100%;
-}
+@media screen and ( max-width : 360px ) {
+
+  .containerFoods {
+    align-items: center;
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    padding: 0.5rem;
+    row-gap: 0.75rem;
+  }
+
+  .containerFoods section {
+    width: 100%;
+  }
 
 }
