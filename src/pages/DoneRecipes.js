@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BsShare } from 'react-icons/bs';
 import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import FilterButtons from '../components/FilterButtons';
-import shareIcon from '../images/shareIcon.svg';
+import styles from '../styles/DoneRecipes.module.css';
 
 export default function DoneRecipes() {
   const [recipes, setRecipes] = useState([]);
@@ -28,51 +29,70 @@ export default function DoneRecipes() {
   };
 
   return (
-    <>
+    <main
+      className={ styles.containerDoneRecipes }
+    >
       <Header statusButton={ false } pageTitle="Done Recipes" />
       <section>
         <FilterButtons filterRecipes={ filterRecipes } />
         { list[0] && list.map((item, index) => (
-          <div key={ index }>
+          <div
+            key={ index }
+            className={ styles.cardDones }
+          >
+            <div>
+              <div>
+                <button
+                  type="button"
+                  onClick={ () => handleClick(item) }
+                  className={ styles.ButtonIcon }
+                  style={ { background: 'none', border: 'none', cursor: 'pointer' } }
+                >
+                  <BsShare
+                    className={ styles.icon }
+                  />
+                </button>
+                { share === item.name && <span>Link copied!</span> }
+              </div>
+              <Link to={ `/${item.type}s/${item.id}` }>
+                <h3 data-testid={ `${index}-horizontal-name` }>{ item.name }</h3>
+              </Link>
+              <Link to={ `/${item.type}s/${item.id}` }>
+                <p
+                  data-testid={ `${index}-horizontal-top-text` }
+                >
+                  { item.type === 'food'
+                    ? `${`${item.nationality} food`}`
+                    : '' }
+                </p>
+              </Link>
+              <Link to={ `/${item.type}s/${item.id}` }>
+                <p
+                  data-testid={ `${index}-horizontal-top-text` }
+                >
+                  { item.type === 'food'
+                    ? `${item.category}`
+                    : `${item.alcoholicOrNot}` }
+                </p>
+              </Link>
+
+              <p
+                data-testid={ `${index}-horizontal-done-date` }
+              >
+                { `${item.doneDate}` }
+              </p>
+            </div>
             <Link to={ `/${item.type}s/${item.id}` }>
               <img
                 data-testid={ `${index}-horizontal-image` }
                 src={ item.image }
                 alt={ item.name }
-                style={ { width: '150px', padding: '0 10px' } }
+                className={ styles.photo }
               />
-              <p
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                { item.type === 'food'
-                  ? `${item.nationality} - ${item.category}`
-                  : `${item.alcoholicOrNot}` }
-              </p>
-              <p data-testid={ `${index}-horizontal-name` }>{ item.name }</p>
             </Link>
-            <p data-testid={ `${index}-horizontal-done-date` }>{ item.doneDate }</p>
-            <button
-              type="button"
-              onClick={ () => handleClick(item) }
-            >
-              <img
-                src={ shareIcon }
-                alt="Ícone de compartilhamento"
-                data-testid={ `${index}-horizontal-share-btn` }
-              />
-            </button>
-            { share === item.name && <span>Link copied!</span> }
-            { item.tags.map((tag, i2) => (
-              <p
-                key={ i2 }
-                data-testid={ `${index}-${tag}-horizontal-tag` }
-              >
-                { tag }
-              </p>
-            )) }
           </div>
         )) }
       </section>
-    </>
+    </main>
   );
 }

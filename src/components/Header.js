@@ -14,7 +14,7 @@ export default function Header({ statusButton, pageTitle }) {
         <FaUser />
       </Link>
       <h1 data-testid="page-title">{ pageTitle }</h1>
-      { statusButton && (
+      { statusButton ? (
         <button
           type="button"
           style={ { background: 'none', border: 'none', cursor: 'pointer' } }
@@ -26,6 +26,8 @@ export default function Header({ statusButton, pageTitle }) {
             data-testid="search-top-btn"
           />
         </button>
+      ) : (
+        <div style={ { width: '2rem' } } />
       )}
     </header>
   );

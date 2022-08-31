@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
+import { BsShare } from 'react-icons/bs';
+import { MdFavorite } from 'react-icons/md';
 import Header from '../components/Header';
-import shareIcon from '../images/shareIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import styles from '../styles/FavoriteRecipes.module.css';
 
 export default function FavoriteRecipes() {
   const [favoriteFoods, setFavoriteFoods] = useState([]);
@@ -32,7 +33,9 @@ export default function FavoriteRecipes() {
   }, []);
 
   return (
-    <>
+    <main
+      className={ styles.containerFavoriteRecipes }
+    >
       <Header statusButton={ false } pageTitle="Favorite Recipes" />
       <div>
         <button
@@ -75,60 +78,62 @@ export default function FavoriteRecipes() {
               }, index) => (
                 <div
                   key={ `${id}-${index}` }
+                  className={ styles.favoriteCards }
                 >
+                  <div>
+                    <div>
+                      <button
+                        type="button"
+                        onClick={ () => handleClickShare(type, id) }
+                        style={ { background: 'none',
+                          border: 'none',
+                          cursor: 'pointer' } }
+                      >
+                        <BsShare
+                          className={ styles.icon }
+                        />
+                      </button>
+                      {elementCopied === id
+                    && (
+                      <span>
+                        Link copied!
+                      </span>
+                    )}
+                    </div>
+                    <Link to={ `/${type}s/${id}` }>
+                      <h3
+                        data-testid={ `${index}-horizontal-name` }
+                      >
+                        {name}
+                      </h3>
+                    </Link>
+                    <p
+                      data-testid={ `${index}-horizontal-top-text` }
+                    >
+                      {type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={ () => handleFavoriteStorage(id) }
+                      style={ { background: 'none', border: 'none', cursor: 'pointer' } }
+                    >
+                      <MdFavorite
+                        className={ styles.iconFavorite }
+                      />
+                    </button>
+                  </div>
                   <Link to={ `/${type}s/${id}` }>
                     <img
                       data-testid={ `${index}-horizontal-image` }
                       src={ image }
                       alt={ `${name}` }
-                      style={ { width: '250px' } }
                     />
                   </Link>
-                  <Link to={ `/${type}s/${id}` }>
-                    <h3
-                      data-testid={ `${index}-horizontal-name` }
-                    >
-                      {name}
-                    </h3>
-                  </Link>
-                  <p
-                    data-testid={ `${index}-horizontal-top-text` }
-                  >
-                    {type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={ () => handleClickShare(type, id) }
-                    style={ { background: 'none', border: 'none', cursor: 'pointer' } }
-                  >
-                    <img
-                      data-testid={ `${index}-horizontal-share-btn` }
-                      src={ shareIcon }
-                      alt="Ícone de compartilhamento"
-                    />
-                  </button>
-                  {elementCopied === id
-                  && (
-                    <span>
-                      Link copied!
-                    </span>
-                  )}
-                  <button
-                    type="button"
-                    onClick={ () => handleFavoriteStorage(id) }
-                    style={ { background: 'none', border: 'none', cursor: 'pointer' } }
-                  >
-                    <img
-                      src={ blackHeartIcon }
-                      alt="Ícone de favoritar"
-                      data-testid={ `${index}-horizontal-favorite-btn` }
-                    />
-                  </button>
                 </div>
               ))
           }
         </section>
       )}
-    </>
+    </main>
   );
 }

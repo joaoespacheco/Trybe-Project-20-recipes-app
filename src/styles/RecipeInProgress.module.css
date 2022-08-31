@@ -8,3 +8,112 @@
   row-gap: 0.75rem;
 }
 
+.containerMealInProgress {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  row-gap: 1rem;
+  width: 100%;
+  align-items: center;
+}
+
+.containerMealInProgress header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.containerMealInProgress header div {
+  align-items: center;
+  column-gap: 0.75rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.containerMealInProgress header h1 {
+  color: #222;
+  font-family: Oleo Script Swash Caps , cursive , sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.containerMealInProgress > img {
+  border-radius: 5px;
+  box-shadow: 0 0 0.5rem #f18806;
+  width: 100%;
+}
+
+.icons {
+  height: 1.8rem;
+}
+
+.ingredientList {
+  background-color: #222;
+  border-radius: 5px;
+  box-shadow: 0 0 0.5rem #f18806;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 100%;
+}
+
+.ingredientList p {
+  text-align: center;
+}
+
+.ingredientList ul {
+  padding-left: 1rem;
+  text-align: left;
+}
+
+.ingredientList li {
+  text-align: left;
+}
+
+.instructions {
+  background-color: #222;
+  border-radius: 5px;
+  box-shadow: 0 0 0.5rem #f18806;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  row-gap: 0.7rem;
+  text-align: left;
+}
+
+.instructions p {
+  line-height: 1.4rem;
+}
+
+.instructions p:nth-child( 1 ) {
+  text-align: center;
+}
+
+.containerMealInProgress iframe {
+  width: 100%;
+}
+
+.buttonStart {
+  background-color: #f1870590;
+  border: none;
+  border-radius: 5px;
+  bottom: 0.5rem;
+  box-shadow: 0 0 0.5rem #222;
+  color: black;
+  font-size: 1.3rem;
+  padding: 0.15rem;
+  position: fixed;
+  width: 80%;
+}
+
+.buttonStart:not( :disabled ) {
+  background-color: #f18805;
+  border: 1px solid #f18805;
+  box-shadow: 0 0 0.4rem #222;
+  color: black;
+  cursor: pointer;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import styles from '../styles/Profile.module.css';
 
 export default function Profile() {
   const history = useHistory();
@@ -14,7 +15,9 @@ export default function Profile() {
   };
 
   return (
-    <>
+    <main
+      className={ styles.containerProfile }
+    >
       <Header statusButton={ false } pageTitle="Profile" />
       <h1 data-testid="profile-email">{ email }</h1>
       <nav>
@@ -43,6 +46,6 @@ export default function Profile() {
         </button>
       </nav>
       <Footer />
-    </>
+    </main>
   );
 }

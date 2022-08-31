@@ -1,0 +1,96 @@
+.containerFavoriteRecipes {
+  align-items: center;
+  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem;
+  row-gap: 0.75rem;
+  width: 100%;
+}
+
+.containerFavoriteRecipes > div {
+  display: grid;
+  grid-gap: 0.3rem;
+  grid-template-columns: auto auto auto;
+  width: 100%;
+}
+
+.containerFavoriteRecipes > div button {
+  background-color: #f18805;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 0.25rem #222;
+  color: #222;
+  font-size: 1rem;
+  padding: 0.15rem;
+  width: 100%;
+}
+
+.containerFavoriteRecipes > section {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  row-gap: 0.75rem;
+  width: 100%;
+}
+
+.favoriteCards {
+  align-items: center;
+  background-color: #222;
+  border-radius: 5px;
+  box-shadow: 0 0 0.5rem #f18805;
+  contain: content;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  text-decoration: none;
+  width: 100%;
+}
+
+.favoriteCards div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.35rem;
+  width: 100%;
+
+}
+
+.favoriteCards div a {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+.favoriteCards div p {
+  color: white;
+  text-align: center;
+}
+
+.favoriteCards a img {
+  height: 8rem;
+}
+
+.favoriteCards div div {
+  align-content: top;
+  color: white;
+  column-gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  left: 0.3rem;
+  position: fixed;
+  top: 0.3rem;
+  width: 100%;
+}
+
+.icon {
+  color: white;
+  font-size: 1rem;
+}
+
+.iconFavorite {
+  color: white;
+  font-size: 2rem;
+}

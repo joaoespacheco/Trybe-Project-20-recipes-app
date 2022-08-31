@@ -1,8 +1,10 @@
+/* eslint-disable max-lines */
 import React, { useState, useEffect } from 'react';
 import { objectOf, string, func, bool } from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import styles from '../styles/RecipeInProgress.module.css';
 
 export default function DrinkInProgress({
   recipe,
@@ -150,81 +152,104 @@ export default function DrinkInProgress({
   }, []);
 
   return (
-    <section>
+    <section
+      className={ styles.containerMealInProgress }
+    >
       {
         !!recipe && (
           <>
-            <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
+            <header>
+              <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
+              <div>
+                {statusMessage
+                  && (
+                    <span>
+                      Link copied!
+                    </span>
+                  )}
+                <button
+                  type="button"
+                  onClick={ handleClickShare }
+                  style={ { background: 'none', border: 'none', cursor: 'pointer' } }
+                  data-testid="share-btn"
+                >
+                  <img
+                    src={ shareIcon }
+                    alt="Ícone de compartilhamento"
+                    className={ styles.icons }
+                  />
+                </button>
+                <button
+                  type="button"
+                  onClick={ handleFavorite }
+                  style={ { background: 'none', border: 'none', cursor: 'pointer' } }
+                >
+                  <img
+                    src={ verifyFavoriteSave() }
+                    alt="Ícone de favoritar"
+                    data-testid="favorite-btn"
+                    className={ styles.icons }
+                  />
+                </button>
+              </div>
+            </header>
+
             <img
               data-testid="recipe-photo"
               src={ recipe.strDrinkThumb }
               alt={ recipe.strDrink }
-              style={ { width: '150px', padding: '0 10px' } }
             />
-            <button
-              type="button"
-              onClick={ handleClickShare }
-              style={ { background: 'none', border: 'none', cursor: 'pointer' } }
-              data-testid="share-btn"
-            >
-              <img
-                src={ shareIcon }
-                alt="Ícone de compartilhamento"
-              />
-            </button>
-            {statusMessage
-      && (
-        <span>
-          Link copied!
-        </span>
-      )}
-            <button
-              type="button"
-              onClick={ handleFavorite }
-              style={ { background: 'none', border: 'none', cursor: 'pointer' } }
-            >
-              <img
-                src={ verifyFavoriteSave() }
-                alt="Ícone de favoritar"
-                data-testid="favorite-btn"
-              />
-            </button>
+
             <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
-            {ingredients.map((ingredient, index) => (
-              <label
-                data-testid={ `${index}-ingredient-step` }
-                htmlFor={ ingredient }
-                key={ `${index}-ingredient-step` }
-              >
-                <input
-                  data-testid={ `input-drinks-${index}` }
-                  id={ ingredient }
-                  type="checkbox"
-                  checked={ verifyStorage(ingredient) }
-                  onChange={ () => handleIngredient(ingredient) }
-                />
-                <span
-                  style={
-                    { textDecoration: (
-                      verifyStorage(ingredient) ? 'line-through' : 'none'
-                    ) }
-                  }
+
+            <div
+              className={ styles.ingredientList }
+            >
+              <p>Lista de Ingredientes:</p>
+              <br />
+              {ingredients.map((ingredient, index) => (
+                <label
+                  data-testid={ `${index}-ingredient-step` }
+                  htmlFor={ ingredient }
+                  key={ `${index}-ingredient-step` }
                 >
-                  { `${ingredient} - ${mensures[index] ? (
-                    mensures[index]
-                  ) : (
-                    'Unmeasured'
-                  )}` }
-                </span>
-              </label>
-            ))}
-            <p data-testid="instructions">{ recipe.strInstructions }</p>
+                  <input
+                    data-testid={ `input-drinks-${index}` }
+                    id={ ingredient }
+                    type="checkbox"
+                    checked={ verifyStorage(ingredient) }
+                    onChange={ () => handleIngredient(ingredient) }
+                  />
+                  <span
+                    style={
+                      { textDecoration: (
+                        verifyStorage(ingredient) ? 'line-through' : 'none'
+                      ) }
+                    }
+                  >
+                    { `${ingredient} - ${mensures[index] ? (
+                      mensures[index]
+                    ) : (
+                      'Unmeasured'
+                    )}` }
+                  </span>
+                </label>
+              ))}
+            </div>
+
+            <div
+              className={ styles.instructions }
+            >
+              <p>Modo de preparo:</p>
+              <p data-testid="instructions">{ recipe.strInstructions }</p>
+            </div>
+
             <button
               type="button"
               data-testid="finish-recipe-btn"
               onClick={ handleDoneStorage }
-              style={ { position: 'fixed', bottom: '0' } }
               disabled={ verifyChecks() }
+              className={ styles.buttonStart }
             >
               Finalizar Receita
             </button>

@@ -1,9 +1,12 @@
 import React from 'react';
 import { func } from 'prop-types';
+import styles from '../styles/DoneRecipes.module.css';
 
 export default function FilterButtons({ filterRecipes }) {
   return (
-    <>
+    <div
+      className={ styles.filterButtons }
+    >
       <button
         type="button"
         data-testid="filter-by-all-btn"
@@ -26,7 +29,7 @@ export default function FilterButtons({ filterRecipes }) {
       >
         Drinks
       </button>
-    </>
+    </div>
 
   );
 }
