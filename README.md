@@ -138,27 +138,36 @@ Tela de perfil: </br>
 </br>
 
 ## 🤹🏽 Habilidades Desenvolvidas:
-* Trabalhar em grupo utilizando metodologias de desenvolvimento ágil
-* Desenvolver uma aplicação react utilizando <strong>Redux</strong> como gerenciador de estado global
+* Trabalhar em grupo ou em pair programming utilizando metodologias de desenvolvimento ágil
+  * SCRUM
+  * KANBAN
+* Desenvolver uma aplicação react
+  * Utilizar a Context API do React para gerenciar estado
+  * Utilizar o React Hook useState
+  * Utilizar o React Hook useContext
+  * Utilizar o React Hook useEffect
+  * Criar Hooks customizados
 * Consumir dados de uma API
 * Utilizar <strong>React Router</strong>
 * Realizar testes unitários utilizando <strong>React Testing Library</strong>
+* Criar layout com foco em dispositivos móveis
 </br>
 
 ## 🧰 Ferramentas:
 * HTML
 * CSS
+  * CSS.modules
 * JavaScript
 * React
+  * React Context API
   * React Router
-  * Redux
   * React Testing Library
+  * React Icons
 * Trello
 </br>
 
 ## 📝 Desenvolvido por:
 * [João Emanuel Soares Pacheco](https://github.com/joaoespacheco)
-* [Jean Paul Bernhardt](https://github.com/beralb)
-* [Lucas Martins Figueiredo](https://github.com/lucasmartinsf)
-* [Leandro Camargo](https://github.com/leandro-bcamargo)
-* [Peter Fritz](https://github.com/peterfritz)
+* [Vinícius Barbosa](https://github.com/ViniciusBF)
+* [Pedro Jorge Machado](https://github.com/PedroJoMa)
+* [João Sousa](https://github.com/rsajoao)
