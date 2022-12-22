@@ -138,7 +138,7 @@ Tela de perfil: </br>
 </br>
 
 ## 🤹🏽 Habilidades Desenvolvidas:
-* Trabalhar em grupo ou em pair programming utilizando metodologias de desenvolvimento ágil
+* Trabalhar em grupo e em pair programming utilizando metodologias de desenvolvimento ágil
   * SCRUM
   * KANBAN
 * Desenvolver uma aplicação react
