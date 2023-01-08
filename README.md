@@ -172,7 +172,7 @@ Tela de perfil: </br>
 
 Faça o clone deste repositório com o seguinte comando:
 
-        git clone git@github.com:joaoespacheco/Trybe-Project-18-Star-Wars-Planets.git
+        git clone git@github.com:joaoespacheco/Trybe-Project-20-recipes-app.git
 
 Para exercutar o projeto utilize o comando abaixo para instalar as dependências:
 
