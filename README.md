@@ -28,6 +28,9 @@ Durante a elaboração do projeto foram utilizadas metodologias de desenvolvimen
 <details>
 <summary><strong>Desempenho</strong></summary>
 Aprovado com 100% de desempenho em todos os requisitos
+
+![image](https://user-images.githubusercontent.com/99846604/211174290-17d91f22-6bc1-4fbd-80e4-908f7d748edd.png)
+
 </details>
 
 <details>
@@ -133,8 +136,64 @@ Tela de perfil: </br>
 
 <details>
 <summary><strong>Visualizar projeto</strong></summary>
-:construction: Área em construção ! :construction:
+
+### Tela de login:
+
+![image](https://user-images.githubusercontent.com/99846604/211174628-000c2722-8963-43bf-a05b-099aead8caa9.png)
+
+### Tela de buscas:
+
+![image](https://user-images.githubusercontent.com/99846604/211174493-e01002f5-5938-4617-9291-e0230a755a76.png)
+
+### Tela de receitas:
+
+![image](https://user-images.githubusercontent.com/99846604/211174521-d792fa76-6021-420e-89fe-b256523e8c5b.png)
+
+### Tela de preparo:
+
+![image](https://user-images.githubusercontent.com/99846604/211174540-9312f828-a7f3-4e76-8e4c-e960791df510.png)
+
+### Receitas prontas:
+
+![image](https://user-images.githubusercontent.com/99846604/211174563-bd26d704-16ea-417c-aa5d-ff92a22bf85c.png)
+
+### Receitas favoritas:
+
+![image](https://user-images.githubusercontent.com/99846604/211174590-2ddbcffb-8593-4033-aa7f-ca26a984d431.png)
+
+### Tela de profile:
+
+![image](https://user-images.githubusercontent.com/99846604/211174601-a34598e5-c343-4484-bfb8-ade90ffa7cdd.png)
+
 </details>
+</br>
+
+## ⚙️ Execução
+
+Faça o clone deste repositório com o seguinte comando:
+
+        git clone git@github.com:joaoespacheco/Trybe-Project-18-Star-Wars-Planets.git
+
+Para exercutar o projeto utilize o comando abaixo para instalar as dependências:
+
+        npm install
+
+Inicie a aplicação com o comando abaixo:
+
+        npm start
+        
+Para exeutar os testes deve-se utilizar o seguinte comando:
+
+        npm test
+
+Caso queira executar um teste específico, rode o comando abaixo:
+
+        npm test <nome-do-arquivo>
+
+Para executar e verificar a cobertura de testes, rode o comando abaixo:
+
+        npm run test-coverage
+
 </br>
 
 ## 🤹🏽 Habilidades Desenvolvidas:
