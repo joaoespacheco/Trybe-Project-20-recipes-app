@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import React, { useState, useEffect } from 'react';
 import { objectOf, string, func, bool } from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
