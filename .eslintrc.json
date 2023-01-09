@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/eslintrc",
   "root": true,
   "extends": ["trybe-frontend"],
-  "rules": {"max-lines": "off"}
+  "rules": {"max-lines": "off", "sonarjs/cognitive-complexity": "off"}
 }
