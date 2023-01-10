@@ -52,7 +52,6 @@ export default function MealRecipe({ recipe, handleClickShare, statusMessage, pa
           <>
             <header>
               <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
-
               <div>
                 {statusMessage
               && (

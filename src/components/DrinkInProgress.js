@@ -193,56 +193,56 @@ export default function DrinkInProgress({
               </div>
             </header>
 
-            <img
-              data-testid="recipe-photo"
-              src={ recipe.strDrinkThumb }
-              alt={ recipe.strDrink }
-            />
-
-            <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
-
-            <div
-              className={ styles.ingredientList }
-            >
-              <p>Lista de Ingredientes:</p>
-              <br />
-              {ingredients.map((ingredient, index) => (
-                <label
-                  data-testid={ `${index}-ingredient-step` }
-                  htmlFor={ ingredient }
-                  key={ `${index}-ingredient-step` }
-                >
-                  <input
-                    data-testid={ `input-drinks-${index}` }
-                    id={ ingredient }
-                    type="checkbox"
-                    checked={ verifyStorage(ingredient) }
-                    onChange={ () => handleIngredient(ingredient) }
-                  />
-                  <span
-                    style={
-                      { textDecoration: (
-                        verifyStorage(ingredient) ? 'line-through' : 'none'
-                      ) }
-                    }
+            <div className={ styles.contentPhoto }>
+              <div className={ styles.photo }>
+                <img
+                  data-testid="recipe-photo"
+                  src={ recipe.strDrinkThumb }
+                  alt={ recipe.strDrink }
+                />
+                <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
+              </div>
+              <div
+                className={ styles.ingredientList }
+              >
+                <p>Lista de Ingredientes:</p>
+                <br />
+                {ingredients.map((ingredient, index) => (
+                  <label
+                    data-testid={ `${index}-ingredient-step` }
+                    htmlFor={ ingredient }
+                    key={ `${index}-ingredient-step` }
                   >
-                    { `${ingredient} - ${mensures[index] ? (
-                      mensures[index]
-                    ) : (
-                      'Unmeasured'
-                    )}` }
-                  </span>
-                </label>
-              ))}
+                    <input
+                      data-testid={ `input-drinks-${index}` }
+                      id={ ingredient }
+                      type="checkbox"
+                      checked={ verifyStorage(ingredient) }
+                      onChange={ () => handleIngredient(ingredient) }
+                    />
+                    <span
+                      style={
+                        { textDecoration: (
+                          verifyStorage(ingredient) ? 'line-through' : 'none'
+                        ) }
+                      }
+                    >
+                      { `${ingredient} - ${mensures[index] ? (
+                        mensures[index]
+                      ) : (
+                        'Unmeasured'
+                      )}` }
+                    </span>
+                  </label>
+                ))}
+              </div>
+              <div
+                className={ styles.instructions }
+              >
+                <h3>Modo de preparo:</h3>
+                <p data-testid="instructions">{ recipe.strInstructions }</p>
+              </div>
             </div>
-
-            <div
-              className={ styles.instructions }
-            >
-              <p>Modo de preparo:</p>
-              <p data-testid="instructions">{ recipe.strInstructions }</p>
-            </div>
-
             <button
               type="button"
               data-testid="finish-recipe-btn"

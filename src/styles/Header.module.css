@@ -4,6 +4,7 @@
   border-radius: 2rem;
   display: flex;
   justify-content: space-between;
+  padding: 0 0.5rem;
   width: 100%;
 }
 

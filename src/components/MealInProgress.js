@@ -194,55 +194,59 @@ export default function MealInProgress({
                 </button>
               </div>
             </header>
-
-            <img
-              data-testid="recipe-photo"
-              src={ recipe.strMealThumb }
-              alt={ recipe.strMeal }
-            />
-
-            <p data-testid="recipe-category">{ `Categoria: ${recipe.strCategory}` }</p>
-
-            <div
-              className={ styles.ingredientList }
-            >
-              <p>Lista de Ingredientes:</p>
-              <br />
-              {ingredients.map((ingredient, index) => (
-                <label
-                  data-testid={ `${index}-ingredient-step` }
-                  htmlFor={ ingredient }
-                  key={ `${index}-ingredient-step` }
+            <div className={ styles.contentPhoto }>
+              <div className={ styles.photo }>
+                <img
+                  data-testid="recipe-photo"
+                  src={ recipe.strMealThumb }
+                  alt={ recipe.strMeal }
+                />
+                <p
+                  data-testid="recipe-category"
                 >
-                  <input
-                    data-testid={ `input-foods-${index}` }
-                    id={ ingredient }
-                    type="checkbox"
-                    checked={ verifyStorage(ingredient) }
-                    onChange={ () => handleIngredient(ingredient) }
-                  />
-                  <span
-                    style={
-                      { textDecoration: (
-                        verifyStorage(ingredient) ? 'line-through' : 'none'
-                      ) }
-                    }
+                  { `Categoria: ${recipe.strCategory}` }
+                </p>
+              </div>
+              <div
+                className={ styles.ingredientList }
+              >
+                <p>Lista de Ingredientes:</p>
+                <br />
+                {ingredients.map((ingredient, index) => (
+                  <label
+                    data-testid={ `${index}-ingredient-step` }
+                    htmlFor={ ingredient }
+                    key={ `${index}-ingredient-step` }
                   >
-                    { `${ingredient} - ${mensures[index] ? (
-                      mensures[index]
-                    ) : (
-                      'Unmeasured'
-                    )}` }
-                  </span>
-                </label>
-              ))}
-            </div>
-
-            <div
-              className={ styles.instructions }
-            >
-              <p>Modo de preparo:</p>
-              <p data-testid="instructions">{ recipe.strInstructions }</p>
+                    <input
+                      data-testid={ `input-foods-${index}` }
+                      id={ ingredient }
+                      type="checkbox"
+                      checked={ verifyStorage(ingredient) }
+                      onChange={ () => handleIngredient(ingredient) }
+                    />
+                    <span
+                      style={
+                        { textDecoration: (
+                          verifyStorage(ingredient) ? 'line-through' : 'none'
+                        ) }
+                      }
+                    >
+                      { `${ingredient} - ${mensures[index] ? (
+                        mensures[index]
+                      ) : (
+                        'Unmeasured'
+                      )}` }
+                    </span>
+                  </label>
+                ))}
+              </div>
+              <div
+                className={ styles.instructions }
+              >
+                <h3>Modo de preparo:</h3>
+                <p data-testid="instructions">{ recipe.strInstructions }</p>
+              </div>
             </div>
 
             <button

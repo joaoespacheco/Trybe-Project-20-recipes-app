@@ -87,37 +87,37 @@ export default function DrinkRecipe({ recipe, handleClickShare, statusMessage, p
                 </button>
               </div>
             </header>
-
-            <img
-              data-testid="recipe-photo"
-              src={ recipe.strDrinkThumb }
-              alt={ recipe.strDrink }
-            />
-
-            <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
-
-            <div
-              className={ styles.ingredientList }
-            >
-              <p>Lista de Ingredientes:</p>
-              <br />
-              <ul>
-                {ingredients.map((ingredient, index) => (
-                  <li
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                    key={ `${index}-ingredient-name-and-measure` }
-                  >
-                    { `${ingredient} - ${mensures[index]}` }
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div
-              className={ styles.instructions }
-            >
-              <p>Modo de preparo:</p>
-              <p data-testid="instructions">{ recipe.strInstructions }</p>
+            <div className={ styles.contentPhoto }>
+              <div className={ styles.photo }>
+                <img
+                  data-testid="recipe-photo"
+                  src={ recipe.strDrinkThumb }
+                  alt={ recipe.strDrink }
+                />
+                <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
+              </div>
+              <div
+                className={ styles.ingredientList }
+              >
+                <p>Lista de Ingredientes:</p>
+                <br />
+                <ul>
+                  {ingredients.map((ingredient, index) => (
+                    <li
+                      data-testid={ `${index}-ingredient-name-and-measure` }
+                      key={ `${index}-ingredient-name-and-measure` }
+                    >
+                      { `${ingredient} - ${mensures[index]}` }
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div
+                className={ styles.instructions }
+              >
+                <h3>Modo de preparo:</h3>
+                <p data-testid="instructions">{ recipe.strInstructions }</p>
+              </div>
             </div>
           </>
         )

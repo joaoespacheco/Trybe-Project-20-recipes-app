@@ -3,18 +3,18 @@
   background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding-bottom: 2rem;
+  justify-content: center;
   row-gap: 0.75rem;
+  width: 100%;
 }
 
 .containerMealInProgress {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  justify-content: center;
   row-gap: 1rem;
   width: 100%;
-  align-items: center;
 }
 
 .containerMealInProgress header {
@@ -34,86 +34,255 @@
 .containerMealInProgress header h1 {
   color: #222;
   font-family: Oleo Script Swash Caps , cursive , sans-serif;
-  font-size: 2rem;
+  font-size: 3.5rem;
   font-weight: 800;
   text-align: center;
 }
 
-.containerMealInProgress > img {
-  border-radius: 5px;
-  box-shadow: 0 0 0.5rem #f18806;
+.contentPhoto {
+  align-items: center;
+  column-gap: 2rem;
+  display: flex;
+  height: 30rem;
+  justify-content: space-between;
   width: 100%;
 }
 
+.photo {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  row-gap: 0.5rem;
+}
+
+.photo > img {
+  border-radius: 25%;
+  box-shadow: 0 0 0.5rem #f18806;
+  width: 28rem;
+}
+
+.photo p {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
 .icons {
-  height: 1.8rem;
+  height: 3rem;
+}
+
+.contentInformations {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  row-gap: 0.5rem;
+  width: 100%;
 }
 
 .ingredientList {
   background-color: #222;
-  border-radius: 5px;
+  border-radius: 1rem;
   box-shadow: 0 0 0.5rem #f18806;
   color: white;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow-y: scroll;
   padding: 1rem;
-  width: 100%;
+  row-gap: 0.25rem;
+  width: 35rem;
 }
 
 .ingredientList p {
+  font-size: 1.5rem;
+  font-weight: 600;
   text-align: center;
 }
 
-.ingredientList ul {
-  padding-left: 1rem;
-  text-align: left;
+.ingredientList label > input {
+  cursor: pointer;
 }
 
-.ingredientList li {
-  text-align: left;
+.ingredientList label > span {
+  padding-left: 0.5rem;
 }
 
 .instructions {
   background-color: #222;
-  border-radius: 5px;
+  border-radius: 1rem;
   box-shadow: 0 0 0.5rem #f18806;
   color: white;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow-y: scroll;
   padding: 1rem;
-  row-gap: 0.7rem;
+  row-gap: 1.25rem;
   text-align: left;
+  width: 60rem;
 }
 
 .instructions p {
+  font-size: 1rem;
   line-height: 1.4rem;
+}
+
+.instructions h3 {
+  font-size: 1.5rem;
+  line-height: 1.4rem;
+  text-align: center;
 }
 
 .instructions p:nth-child( 1 ) {
   text-align: center;
 }
 
-.containerMealInProgress iframe {
+.containerRecipeMeal iframe {
+  height: 30rem;
   width: 100%;
 }
 
 .buttonStart {
-  background-color: #f1870590;
-  border: none;
-  border-radius: 5px;
-  bottom: 0.5rem;
-  box-shadow: 0 0 0.5rem #222;
-  color: black;
-  font-size: 1.3rem;
-  padding: 0.15rem;
-  position: fixed;
-  width: 80%;
-}
-
-.buttonStart:not( :disabled ) {
   background-color: #f18805;
-  border: 1px solid #f18805;
-  box-shadow: 0 0 0.4rem #222;
+  border: none;
+  border-radius: 50%;
+  bottom: 4rem;
+  box-shadow: 0 0 1rem #222;
   color: black;
   cursor: pointer;
+  font-size: 2rem;
+  font-weight: 600;
+  height: 12rem;
+  padding: 1rem;
+  position: fixed;
+  right: 1.8rem;
+  text-align: center;
+  width: 12rem;
+}
+
+.buttonStart:disabled {
+  background-color: #f18805;
+  box-shadow: 0 0 0.4rem #222;
+  color: black;
+  opacity: 0.6;
+}
+
+@media screen and ( max-width : 360px ) {
+
+  .containerRecipeInProgress {
+    align-items: center;
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-bottom: 2rem;
+    row-gap: 0.75rem;
+  }
+
+  .containerMealInProgress {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.5rem;
+    row-gap: 1rem;
+    width: 100%;
+  }
+
+  .containerMealInProgress header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .containerMealInProgress header div {
+    align-items: center;
+    column-gap: 0.75rem;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .containerMealInProgress header h1 {
+    color: #222;
+    font-family: Oleo Script Swash Caps , cursive , sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .contentPhoto {
+    column-gap: 0;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    row-gap: 1rem;
+    width: 100%;
+  }
+
+  .photo {
+    row-gap: 1rem;
+  }
+
+  .photo > img {
+    border-radius: 0.5rem;
+    padding: 0;
+    width: 100%;
+  }
+
+  .icons {
+    height: 1.8rem;
+  }
+
+  .ingredientList {
+    background-color: #222;
+    border-radius: 5px;
+    box-shadow: 0 0 0.5rem #f18806;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .ingredientList p {
+    text-align: center;
+  }
+
+  .instructions {
+    border-radius: 0.5rem;
+    height: auto;
+    overflow-y: none;
+    row-gap: 0.7rem;
+    width: 100%;
+  }
+
+  .instructions p {
+    line-height: 1.4rem;
+  }
+
+  .instructions p:nth-child( 1 ) {
+    text-align: center;
+  }
+
+  .containerMealInProgress iframe {
+    width: 100%;
+  }
+
+  .buttonStart {
+    background-color: #f18805;
+    border: none;
+    border-radius: 5px;
+    bottom: 0.5rem;
+    box-shadow: 0 0 0.5rem #222;
+    color: black;
+    cursor: pointer;
+    font-size: 1.3rem;
+    height: auto;
+    left: 1.1rem;
+    padding: 0.15rem;
+    position: fixed;
+    width: 90%;
+  }
 }
