@@ -137,7 +137,7 @@ export default function RecipeDetails() {
             onClick={ () => handleLocalStorage() }
             className={ styles.buttonStart }
           >
-            {statusInProgress ? 'Continue Recipe' : 'Start Recipe'}
+            {statusInProgress ? 'Continue recipe' : 'Start recipe'}
           </button>
         )
       }

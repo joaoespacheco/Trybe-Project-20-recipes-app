@@ -86,50 +86,55 @@ export default function MealRecipe({ recipe, handleClickShare, statusMessage, pa
                 </button>
               </div>
             </header>
-
-            <img
-              data-testid="recipe-photo"
-              src={ recipe.strMealThumb }
-              alt={ recipe.strMeal }
-            />
-
-            <p data-testid="recipe-category">{ `Categoria: ${recipe.strCategory}` }</p>
-
-            <div
-              className={ styles.ingredientList }
-            >
-              <p>Lista de Ingredientes:</p>
-              <ul>
-                <br />
-                {ingredients.map((ingredient, index) => (
-                  <li
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                    key={ `${index}-ingredient-name-and-measure` }
-                  >
-                    { `${ingredient} - ${mensures[index]}` }
-                  </li>
-                ))}
-              </ul>
+            <div className={ styles.contentPhoto }>
+              <div className={ styles.photo }>
+                <img
+                  data-testid="recipe-photo"
+                  src={ recipe.strMealThumb }
+                  alt={ recipe.strMeal }
+                />
+                <p
+                  data-testid="recipe-category"
+                >
+                  { `Categoria: ${recipe.strCategory}` }
+                </p>
+              </div>
+              <div
+                className={ styles.ingredientList }
+              >
+                <p>Lista de Ingredientes:</p>
+                <ul>
+                  <br />
+                  {ingredients.map((ingredient, index) => (
+                    <li
+                      data-testid={ `${index}-ingredient-name-and-measure` }
+                      key={ `${index}-ingredient-name-and-measure` }
+                    >
+                      { `${ingredient} - ${mensures[index]}` }
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div
+                className={ styles.instructions }
+              >
+                <h3>Modo de preparo:</h3>
+                <p data-testid="instructions">{ recipe.strInstructions }</p>
+              </div>
             </div>
-            <div
-              className={ styles.instructions }
-            >
-              <p>Modo de preparo:</p>
-              <p data-testid="instructions">{ recipe.strInstructions }</p>
-            </div>
-
-            <iframe
-              data-testid="video"
-              width="360"
-              height="202"
-              src={ `https://www.youtube.com/embed/${idVideo}` }
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; clipboard-write;
+            <div className={ styles.contentInformations }>
+              <iframe
+                data-testid="video"
+                width="360"
+                height="202"
+                src={ `https://www.youtube.com/embed/${idVideo}` }
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; clipboard-write;
               encrypted-media;"
-              allowFullScreen
-            />
-
+                allowFullScreen
+              />
+            </div>
           </>
         )
       }
