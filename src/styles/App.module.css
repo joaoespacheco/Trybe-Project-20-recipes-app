@@ -1,5 +1,6 @@
 .appContainer {
   background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
   min-height: 100vh;
-  min-width: 100vw;
+  padding: 0.5rem 1rem;
+  width: 100vw;
 }

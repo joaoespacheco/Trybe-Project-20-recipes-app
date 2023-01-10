@@ -3,13 +3,12 @@
   column-gap: 0.5rem;
   display: flex;
   justify-content: flex-start;
-  padding: 0.5rem , 0.5rem , 0.5rem , 0;
+  width: 100%;
 }
 
 .galleryCell {
   background-color: #222;
   border-radius: 5px;
-  box-shadow: 0 0 0.2rem #f18805;
   padding: 0.5rem;
 }
 

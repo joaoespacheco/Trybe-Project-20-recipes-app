@@ -5,12 +5,14 @@
   flex-direction: column;
   justify-content: center;
   row-gap: 0.75rem;
+  width: 100%;
 }
 
 .containerRecipeMeal {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  justify-content: center;
   row-gap: 1rem;
   width: 100%;
 }
@@ -163,8 +165,8 @@
 @media screen and ( max-width : 360px ) {
 
   .containerRecipeDetail {
-    padding: 0 0 2rem;
-    width: 100vw;
+    padding: 0 0 2.25rem;
+    width: 100%;
   }
 
   .containerRecipeDetail > section {
