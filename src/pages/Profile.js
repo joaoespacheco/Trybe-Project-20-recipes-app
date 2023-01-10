@@ -15,37 +15,37 @@ export default function Profile() {
   };
 
   return (
-    <main
-      className={ styles.containerProfile }
-    >
+    <section className={ styles.containerProfile }>
       <Header statusButton={ false } pageTitle="Profile" />
-      <h1 data-testid="profile-email">{ email }</h1>
-      <nav>
-        <button
-          type="button"
-          data-testid="profile-done-btn"
-          onClick={ () => history.push('/done-recipes') }
-        >
-          Done Recipes
-        </button>
+      <main className={ styles.contentProfile }>
+        <h1 data-testid="profile-email">{ email }</h1>
+        <nav>
+          <button
+            type="button"
+            data-testid="profile-done-btn"
+            onClick={ () => history.push('/done-recipes') }
+          >
+            Done Recipes
+          </button>
 
-        <button
-          type="button"
-          data-testid="profile-favorite-btn"
-          onClick={ () => history.push('/favorite-recipes') }
-        >
-          Favorite Recipes
-        </button>
+          <button
+            type="button"
+            data-testid="profile-favorite-btn"
+            onClick={ () => history.push('/favorite-recipes') }
+          >
+            Favorite Recipes
+          </button>
 
-        <button
-          type="button"
-          data-testid="profile-logout-btn"
-          onClick={ logout }
-        >
-          Logout
-        </button>
-      </nav>
+          <button
+            type="button"
+            data-testid="profile-logout-btn"
+            onClick={ logout }
+          >
+            Logout
+          </button>
+        </nav>
+      </main>
       <Footer />
-    </main>
+    </section>
   );
 }

@@ -1,4 +1,7 @@
 .containerHeader {
+  align-items: center;
+  border-bottom: 0.35rem solid white;
+  border-radius: 2rem;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -6,24 +9,58 @@
 
 .containerHeader h1 {
   color: #222;
-  font-family: 'Oleo Script Swash Caps', 'cursive';
-  font-size: 2rem;
+  font-family: Oleo Script Swash Caps , cursive;
+  font-size: 4rem;
   font-weight: 800;
 }
 
 .containerHeader a {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
+  padding-left: 1rem;
 }
 
 .containerHeader button {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
+  padding-right: 1rem;
+}
+
+.containerHeader button img {
+  height: 3rem;
 }
 
 .containerHeader svg {
-  color: #222222;
-  font-size: 2rem;
+  color: #222;
+  font-size: 3rem;
+}
+
+@media screen and ( max-width : 360px ) {
+
+  .containerHeader {
+    border-bottom: 0.2rem solid white;
+    border-radius: 0.5rem;
+  }
+
+  .containerHeader h1 {
+    font-size: 2rem;
+  }
+
+  .containerHeader a {
+    padding-left: 0;
+  }
+
+  .containerHeader button {
+    padding-right: 0;
+  }
+
+  .containerHeader button img {
+    height: 1.8rem;
+  }
+
+  .containerHeader svg {
+    font-size: 1.8rem;
+  }
 }

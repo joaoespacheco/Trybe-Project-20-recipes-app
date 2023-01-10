@@ -33,8 +33,8 @@ export default function DoneRecipes() {
       className={ styles.containerDoneRecipes }
     >
       <Header statusButton={ false } pageTitle="Done Recipes" />
+      <FilterButtons filterRecipes={ filterRecipes } />
       <section>
-        <FilterButtons filterRecipes={ filterRecipes } />
         { list[0] && list.map((item, index) => (
           <div
             key={ index }

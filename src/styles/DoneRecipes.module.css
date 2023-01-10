@@ -9,19 +9,10 @@
   row-gap: 0.75rem;
 }
 
-.containerDoneRecipes section {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  row-gap: 0.75rem;
-  width: 100%;
-}
-
 .filterButtons {
-  display: grid;
-  grid-gap: 0.3rem;
-  grid-template-columns: auto auto auto;
-  width: 100%;
+  column-gap: 1rem;
+  display: flex;
+  width: 80%;
 }
 
 .filterButtons button {
@@ -30,9 +21,19 @@
   border-radius: 5px;
   box-shadow: 0 0 0.25rem #222;
   color: #222;
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 0.15rem;
   width: 100%;
+}
+
+.containerDoneRecipes section {
+  align-items: flex-start;
+  column-gap: 1rem;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  row-gap: 1rem;
+  width: 90%;
 }
 
 .cardDones {
@@ -45,7 +46,7 @@
   justify-content: space-between;
   padding: 1rem;
   text-decoration: none;
-  width: 100%;
+  width: 30rem;
 }
 
 .cardDones div {
@@ -65,7 +66,7 @@
 }
 
 .photo {
-  width: 8rem;
+  width: 10rem;
 }
 
 .cardDones div div {
@@ -75,6 +76,7 @@
   flex-direction: row;
   justify-content: left;
   left: 0.3rem;
+  padding: 0.35rem;
   position: fixed;
   top: 0.3rem;
   width: 100%;
@@ -82,5 +84,38 @@
 
 .icon {
   color: white;
-  font-size: 1rem;
+  font-size: 1.5rem;
+}
+
+@media screen and ( max-width : 360px ) {
+
+  .containerDoneRecipes section {
+    flex-direction: column;
+    min-height: 100vh;
+    row-gap: 0.75rem;
+    width: 100%;
+  }
+
+  .filterButtons {
+    display: grid;
+    grid-gap: 0.3rem;
+    grid-template-columns: auto auto auto;
+    width: 100%;
+  }
+
+  .filterButtons button {
+    font-size: 1rem;
+  }
+
+  .cardDones {
+    width: 100%;
+  }
+
+  .photo {
+    width: 8rem;
+  }
+
+  .icon {
+    font-size: 1rem;
+  }
 }
