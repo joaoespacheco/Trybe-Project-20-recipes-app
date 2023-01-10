@@ -206,7 +206,6 @@ export default function DrinkInProgress({
                 className={ styles.ingredientList }
               >
                 <p>Lista de Ingredientes:</p>
-                <br />
                 {ingredients.map((ingredient, index) => (
                   <label
                     data-testid={ `${index}-ingredient-step` }

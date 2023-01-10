@@ -103,7 +103,6 @@ export default function MealRecipe({ recipe, handleClickShare, statusMessage, pa
               >
                 <p>Lista de Ingredientes:</p>
                 <ul>
-                  <br />
                   {ingredients.map((ingredient, index) => (
                     <li
                       data-testid={ `${index}-ingredient-name-and-measure` }

@@ -100,7 +100,6 @@ export default function DrinkRecipe({ recipe, handleClickShare, statusMessage, p
                 className={ styles.ingredientList }
               >
                 <p>Lista de Ingredientes:</p>
-                <br />
                 <ul>
                   {ingredients.map((ingredient, index) => (
                     <li
