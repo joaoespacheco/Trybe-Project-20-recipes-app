@@ -137,6 +137,10 @@ Tela de perfil: </br>
 <details>
 <summary><strong>Imagens do projeto</strong></summary>
 
+</br>
+<details>
+<summary>Versão mobile</summary>
+
 ### Tela de login:
 
 ![image](https://user-images.githubusercontent.com/99846604/211174628-000c2722-8963-43bf-a05b-099aead8caa9.png)
@@ -164,6 +168,8 @@ Tela de perfil: </br>
 ### Tela de profile:
 
 ![image](https://user-images.githubusercontent.com/99846604/211174601-a34598e5-c343-4484-bfb8-ade90ffa7cdd.png)
+        
+</details>
 
 </details>
 
