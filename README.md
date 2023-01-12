@@ -135,7 +135,7 @@ Tela de perfil: </br>
 </details>
 
 <details>
-<summary><strong>Visualizar projeto</strong></summary>
+<summary><strong>Imagens do projeto</strong></summary>
 
 ### Tela de login:
 
@@ -166,6 +166,11 @@ Tela de perfil: </br>
 ![image](https://user-images.githubusercontent.com/99846604/211174601-a34598e5-c343-4484-bfb8-ade90ffa7cdd.png)
 
 </details>
+
+</br>
+
+### [👨‍💻 Clique aqui para acessar o projeto em seu navegador](https://recipes-app-joaoespacheco.vercel.app/) 
+
 </br>
 
 ## ⚙️ Execução
@@ -174,7 +179,7 @@ Faça o clone deste repositório com o seguinte comando:
 
         git clone git@github.com:joaoespacheco/Trybe-Project-20-recipes-app.git
 
-Para exercutar o projeto utilize o comando abaixo para instalar as dependências:
+Dentro da pasta raiz do projeto, instale as dependências com o seguinte comando:
 
         npm install
 
